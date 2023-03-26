@@ -2,24 +2,28 @@ import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInterior.module.css";
 
-const DUMMY_DATA = [
-  {
-    name: "mirror",
-    price: 20,
-    desciption: "ordinary mirror nothing special",
-    shopAddress: "Somewhere",
-    coorX: 189,
-    coorY: 156,
-  },
-  {
-    name: "sofa",
-    price: 100,
-    desciption: "sofa that makes you comfortable",
-    shopAddress: "gotoparchase",
-    coorX: 213,
-    coorY: 422,
-  },
-];
+const DUMMY_DATA = {
+  imgUrl:
+    "https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80",
+  items: [
+    {
+      name: "mirror",
+      price: 20,
+      desciption: "ordinary mirror nothing special",
+      shopAddress: "Somewhere",
+      coorX: 189,
+      coorY: 156,
+    },
+    {
+      name: "sofa",
+      price: 100,
+      desciption: "sofa that makes you comfortable",
+      shopAddress: "gotoparchase",
+      coorX: 213,
+      coorY: 422,
+    },
+  ],
+};
 
 const ShowInterior = () => {
   const [showInfo, setShowInfo] = useState(false);
@@ -68,7 +72,7 @@ const ShowInterior = () => {
         onMouseOver={showStuffInfoHandler}
         onMouseOut={hideStuffInfoHandler}
         onClick={getCoordinagesHandler}
-        src="https://images.unsplash.com/photo-1618220179428-22790b461013?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=327&q=80"
+        src={DUMMY_DATA.imgUrl}
         alt="cannot load the image."
         ref={imgRef}
       />
@@ -78,19 +82,19 @@ const ShowInterior = () => {
           onMouseOut={hideStuffInfoHandler}
           style={{
             position: "absolute",
-            left: `${offset.left + DUMMY_DATA[0].coorX}px`,
-            top: `${offset.top + DUMMY_DATA[0].coorY}px`,
+            left: `${offset.left + DUMMY_DATA.items[0].coorX}px`,
+            top: `${offset.top + DUMMY_DATA.items[0].coorY}px`,
             background: "#8e8e8e66",
             color: "white",
             borderRadius: "4px",
           }}
         >
-          <h3 className={classes["stuff-title"]}>Mirror</h3>
-          <p className={classes["stuff-price"]}>price: 30$</p>
+          <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[0].name}</h3>
+          <p className={classes["stuff-price"]}>{DUMMY_DATA.items[0].price}$</p>
           <p className={classes["stuff-desc"]}>
-            description: Round shpaed mirror
+            {DUMMY_DATA.items[0].desciption}
           </p>
-          <a href={DUMMY_DATA[0].shopAddress}>go to parchase site</a>
+          <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
         </div>
       )}
       {showInfo && (
@@ -99,19 +103,17 @@ const ShowInterior = () => {
           onMouseOut={hideStuffInfoHandler}
           style={{
             position: "absolute",
-            left: `${offset.left + DUMMY_DATA[1].coorX}PX`,
-            top: `${offset.top + DUMMY_DATA[1].coorY}PX`,
+            left: `${offset.left + DUMMY_DATA.items[1].coorX}PX`,
+            top: `${offset.top + DUMMY_DATA.items[1].coorY}PX`,
             background: "#8e8e8e66",
             color: "white",
             borderRadius: "4px",
           }}
         >
-          <h3 className={classes["stuff-title"]}>Sofa</h3>
-          <p className={classes["stuff-price"]}>price: 200$</p>
-          <p className={classes["stuff-desc"]}>
-            description: sofa to make you comfortable
-          </p>
-          <a href={DUMMY_DATA[1].shopAddress}>go to parchase site</a>
+          <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[1].name}</h3>
+          <p className={classes["stuff-price"]}>{DUMMY_DATA.items[1].price}$</p>
+          <p className={classes["stuff-desc"]}>{DUMMY_DATA.items[1].desciption}</p>
+          <a href={DUMMY_DATA.items[1].shopAddress}>go to parchase site</a>
         </div>
       )}
     </div>
