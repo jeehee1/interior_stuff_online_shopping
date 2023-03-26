@@ -7,6 +7,7 @@ const DUMMY_DATA = [
     name: "mirror",
     price: 20,
     desciption: "ordinary mirror nothing special",
+    shopAddress: "Somewhere",
     coorX: 189,
     coorY: 156,
   },
@@ -14,6 +15,7 @@ const DUMMY_DATA = [
     name: "sofa",
     price: 100,
     desciption: "sofa that makes you comfortable",
+    shopAddress: "gotoparchase",
     coorX: 213,
     coorY: 422,
   },
@@ -54,9 +56,6 @@ const ShowInterior = () => {
   //get coordinates when clicking at some point of the image.
   const getCoordinagesHandler = (event) => {
     event.preventDefault();
-    // const offset = imgRef.current.getBoundingClientRect();
-    // const x = Math.floor(((event.pageX - offset.left) / offset.width) * 100);
-    // const y = Math.floor(((event.pageY - offset.top) / offset.height) * 100);
     const x = event.pageX - offset.left;
     const y = event.pageY - offset.top;
     console.log(x);
@@ -91,6 +90,7 @@ const ShowInterior = () => {
           <p className={classes["stuff-desc"]}>
             description: Round shpaed mirror
           </p>
+          <a href={DUMMY_DATA[0].shopAddress}>go to parchase site</a>
         </div>
       )}
       {showInfo && (
@@ -111,6 +111,7 @@ const ShowInterior = () => {
           <p className={classes["stuff-desc"]}>
             description: sofa to make you comfortable
           </p>
+          <a href={DUMMY_DATA[1].shopAddress}>go to parchase site</a>
         </div>
       )}
     </div>
