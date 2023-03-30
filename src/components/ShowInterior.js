@@ -33,23 +33,27 @@ const ShowInterior = () => {
     width: null,
     height: null,
   });
+
+  const [textCoor, setTextCoor] = useState({
+    textX: 0,
+    textY: 0,
+  });
   const imgRef = useRef();
 
-  useEffect(() => {}, [imgRef]);
-  console.log(offset);
+  // useEffect(() => {}, [imgRef]);
+  // console.log(offset);
 
   const showStuffInfoHandler = () => {
     setShowInfo(true);
-    const offset = imgRef.current.getBoundingClientRect();
 
     const curImgOffset = imgRef.current.getBoundingClientRect();
+    console.log(curImgOffset);
     setOffset({
       top: curImgOffset.top,
       left: curImgOffset.left,
       width: curImgOffset.width,
       height: curImgOffset.height,
     });
-    console.log("imageoffset : " + offset);
   };
 
   const hideStuffInfoHandler = () => {
@@ -62,9 +66,19 @@ const ShowInterior = () => {
     event.preventDefault();
     const x = event.pageX - offset.left;
     const y = event.pageY - offset.top;
-    console.log(x);
-    console.log(y);
+    console.log("point x : " + x);
+    console.log("point y : " + y);
   };
+
+  console.log("textX : " + `${offset.left + DUMMY_DATA.items[0].coorX}px`);
+  console.log(
+    "textY : " +
+      `${
+        offset.top < 0
+          ? DUMMY_DATA.items[0].coorY
+          : offset.top + DUMMY_DATA.items[0].coorY
+      }px`
+  );
 
   return (
     <div className={classes["img-frame"]}>
@@ -83,7 +97,11 @@ const ShowInterior = () => {
           style={{
             position: "absolute",
             left: `${offset.left + DUMMY_DATA.items[0].coorX}px`,
-            top: `${offset.top + DUMMY_DATA.items[0].coorY}px`,
+            top: `${
+              offset.top < 0
+                ? DUMMY_DATA.items[0].coorY
+                : offset.top + DUMMY_DATA.items[0].coorY
+            }px`,
             background: "#8e8e8e66",
             color: "white",
             borderRadius: "4px",
@@ -103,8 +121,12 @@ const ShowInterior = () => {
           onMouseOut={hideStuffInfoHandler}
           style={{
             position: "absolute",
-            left: `${offset.left + DUMMY_DATA.items[1].coorX}PX`,
-            top: `${offset.top + DUMMY_DATA.items[1].coorY}PX`,
+            left: `${offset.left + DUMMY_DATA.items[1].coorX}px`,
+            top: `${
+              offset.top < 0
+                ? DUMMY_DATA.items[1].coorY
+                : offset.top + DUMMY_DATA.items[1].coorY
+            }px`,
             background: "#8e8e8e66",
             color: "white",
             borderRadius: "4px",
@@ -112,7 +134,9 @@ const ShowInterior = () => {
         >
           <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[1].name}</h3>
           <p className={classes["stuff-price"]}>{DUMMY_DATA.items[1].price}$</p>
-          <p className={classes["stuff-desc"]}>{DUMMY_DATA.items[1].desciption}</p>
+          <p className={classes["stuff-desc"]}>
+            {DUMMY_DATA.items[1].desciption}
+          </p>
           <a href={DUMMY_DATA.items[1].shopAddress}>go to parchase site</a>
         </div>
       )}
