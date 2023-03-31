@@ -1,6 +1,6 @@
 import classes from "./RootLayout.module.css";
 import MainNavigation from "../components/layout/MainNavigation";
-import InteriorLists from "../components/interiors/InteriorLists";
+import { Outlet } from "react-router-dom";
 
 const RootLayout = () => {
   return (
@@ -8,7 +8,7 @@ const RootLayout = () => {
       <h1>DESIGN your House</h1>
       <main className={classes["page-frame"]}>
         <MainNavigation />
-        <InteriorLists />
+        <Outlet />
       </main>
     </>
   );

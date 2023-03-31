@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
-import classes from "./ShowInterior.module.css";
+import classes from "./ShowInteriors.module.css";
 
 const DUMMY_DATA = {
   imgUrl:
@@ -25,7 +25,7 @@ const DUMMY_DATA = {
   ],
 };
 
-const ShowInterior = () => {
+const ShowInteriors = () => {
   const [showInfo, setShowInfo] = useState(false);
   const [offset, setOffset] = useState({
     top: null,
@@ -144,4 +144,4 @@ const ShowInterior = () => {
   );
 };
 
-export default ShowInterior;
+export default ShowInteriors;
