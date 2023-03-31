@@ -1,6 +1,6 @@
-import classes from "./InteriorList.module.css";
+import classes from "./InteriorLists.module.css";
 
-const InteriorList = () => {
+const InteriorLists = () => {
   return (
       <div className={classes["interior-list"]}>
         <div className={classes["interior-card"]}>
@@ -38,4 +38,4 @@ const InteriorList = () => {
   );
 };
 
-export default InteriorList;
+export default InteriorLists;
