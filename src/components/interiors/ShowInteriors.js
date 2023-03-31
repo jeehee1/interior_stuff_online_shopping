@@ -11,8 +11,8 @@ const DUMMY_DATA = {
       price: 20,
       desciption: "ordinary mirror nothing special",
       shopAddress: "Somewhere",
-      coorX: 189,
-      coorY: 156,
+      coorX: 195,
+      coorY: 165,
     },
     {
       name: "sofa",
@@ -65,20 +65,15 @@ const ShowInteriors = () => {
   const getCoordinagesHandler = (event) => {
     event.preventDefault();
     const x = event.pageX - offset.left;
-    const y = event.pageY - offset.top;
-    console.log("point x : " + x);
-    console.log("point y : " + y);
-  };
+    const y = event.pageY - window.pageYOffset - offset.top;
 
-  console.log("textX : " + `${offset.left + DUMMY_DATA.items[0].coorX}px`);
-  console.log(
-    "textY : " +
-      `${
-        offset.top < 0
-          ? DUMMY_DATA.items[0].coorY
-          : offset.top + DUMMY_DATA.items[0].coorY
-      }px`
-  );
+    console.log("offset x : " + offset.left);
+    console.log("offset y : " + offset.top);
+    console.log("point x : " + event.pageX);
+    console.log("point y : " + event.pageY);
+    console.log("scroll y : " + window.pageYOffset);
+    console.log(y);
+  };
 
   return (
     <div className={classes["img-frame"]}>
@@ -96,12 +91,8 @@ const ShowInteriors = () => {
           onMouseOut={hideStuffInfoHandler}
           style={{
             position: "absolute",
-            left: `${offset.left + DUMMY_DATA.items[0].coorX}px`,
-            top: `${
-              offset.top < 0
-                ? DUMMY_DATA.items[0].coorY
-                : offset.top + DUMMY_DATA.items[0].coorY
-            }px`,
+            left: `${DUMMY_DATA.items[0].coorX}px`,
+            top: `${DUMMY_DATA.items[0].coorY}px`,
             background: "#8e8e8e66",
             color: "white",
             borderRadius: "4px",
@@ -121,12 +112,8 @@ const ShowInteriors = () => {
           onMouseOut={hideStuffInfoHandler}
           style={{
             position: "absolute",
-            left: `${offset.left + DUMMY_DATA.items[1].coorX}px`,
-            top: `${
-              offset.top < 0
-                ? DUMMY_DATA.items[1].coorY
-                : offset.top + DUMMY_DATA.items[1].coorY
-            }px`,
+            left: `${DUMMY_DATA.items[1].coorX}px`,
+            top: `${DUMMY_DATA.items[1].coorY}px`,
             background: "#8e8e8e66",
             color: "white",
             borderRadius: "4px",
