@@ -1,7 +1,10 @@
+.interior-list {
+    margin: 0 auto;
+}
+
 .interior-list ul {
     list-style: none;
     display: flex;
-    text-align: center;
     flex-wrap: wrap;
 }
 
