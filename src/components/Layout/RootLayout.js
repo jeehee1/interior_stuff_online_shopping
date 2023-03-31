@@ -1,6 +1,6 @@
 import classes from './RootLayout.module.css'
-import InteriorList from "../components/InteriorList";
-import MainNavigation from "../components/Layout/MainNavigation";
+import InteriorList from "../InteriorList";
+import MainNavigation from "./MainNavigation";
 
 const RootLayout = () => {
   return (
