@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInteriors.module.css";
+import Card from '../layout/Card'
 
 const DUMMY_DATA = {
   imgUrl:
@@ -135,22 +136,22 @@ const ShowInteriors = () => {
         <div>
             <p>image information : It's fancy living room.</p>
         </div>
-        <div>
+        <Card>
           <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[0].name}</h3>
           <p className={classes["stuff-price"]}>{DUMMY_DATA.items[0].price}$</p>
           <p className={classes["stuff-desc"]}>
             {DUMMY_DATA.items[0].desciption}
           </p>
           <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
-        </div>
-        <div>
+        </Card>
+        <Card>
           <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[1].name}</h3>
           <p className={classes["stuff-price"]}>{DUMMY_DATA.items[1].price}$</p>
           <p className={classes["stuff-desc"]}>
             {DUMMY_DATA.items[1].desciption}
           </p>
           <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
-        </div>
+        </Card>
       </div>
     </div>
   );

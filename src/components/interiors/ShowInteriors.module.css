@@ -5,6 +5,7 @@
     flex-wrap: wrap;
     position: relative;
     text-align: center;
+    justify-content: center;
 }
 
 .stuff-title {
