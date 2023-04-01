@@ -77,27 +77,65 @@ const ShowInteriors = () => {
 
   return (
     <div className={classes["img-frame"]}>
-      <img
-        onMouseOver={showStuffInfoHandler}
-        onMouseOut={hideStuffInfoHandler}
-        onClick={getCoordinagesHandler}
-        src={DUMMY_DATA.imgUrl}
-        alt="cannot load the image."
-        ref={imgRef}
-      />
-      {showInfo && (
-        <div
+      <div>
+        <img
           onMouseOver={showStuffInfoHandler}
           onMouseOut={hideStuffInfoHandler}
-          style={{
-            position: "absolute",
-            left: `${DUMMY_DATA.items[0].coorX}px`,
-            top: `${DUMMY_DATA.items[0].coorY}px`,
-            background: "#8e8e8e66",
-            color: "white",
-            borderRadius: "4px",
-          }}
-        >
+          onClick={getCoordinagesHandler}
+          src={DUMMY_DATA.imgUrl}
+          alt="cannot load the image."
+          ref={imgRef}
+        />
+        {showInfo && (
+          <div
+            onMouseOver={showStuffInfoHandler}
+            onMouseOut={hideStuffInfoHandler}
+            style={{
+              position: "absolute",
+              left: `${DUMMY_DATA.items[0].coorX}px`,
+              top: `${DUMMY_DATA.items[0].coorY}px`,
+              background: "#8e8e8e66",
+              color: "white",
+              borderRadius: "4px",
+            }}
+          >
+            <h3 className={classes["stuff-title"]}>
+              {DUMMY_DATA.items[0].name}
+            </h3>
+            <p className={classes["stuff-price"]}>
+              {DUMMY_DATA.items[0].price}$
+            </p>
+            <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
+          </div>
+        )}
+        {showInfo && (
+          <div
+            onMouseOver={showStuffInfoHandler}
+            onMouseOut={hideStuffInfoHandler}
+            style={{
+              position: "absolute",
+              left: `${DUMMY_DATA.items[1].coorX}px`,
+              top: `${DUMMY_DATA.items[1].coorY}px`,
+              background: "#8e8e8e66",
+              color: "white",
+              borderRadius: "4px",
+            }}
+          >
+            <h3 className={classes["stuff-title"]}>
+              {DUMMY_DATA.items[1].name}
+            </h3>
+            <p className={classes["stuff-price"]}>
+              {DUMMY_DATA.items[1].price}$
+            </p>
+            <a href={DUMMY_DATA.items[1].shopAddress}>go to parchase site</a>
+          </div>
+        )}
+      </div>
+      <div className={classes['interior-info']}>
+        <div>
+            <p>image information : It's fancy living room.</p>
+        </div>
+        <div>
           <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[0].name}</h3>
           <p className={classes["stuff-price"]}>{DUMMY_DATA.items[0].price}$</p>
           <p className={classes["stuff-desc"]}>
@@ -105,28 +143,15 @@ const ShowInteriors = () => {
           </p>
           <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
         </div>
-      )}
-      {showInfo && (
-        <div
-          onMouseOver={showStuffInfoHandler}
-          onMouseOut={hideStuffInfoHandler}
-          style={{
-            position: "absolute",
-            left: `${DUMMY_DATA.items[1].coorX}px`,
-            top: `${DUMMY_DATA.items[1].coorY}px`,
-            background: "#8e8e8e66",
-            color: "white",
-            borderRadius: "4px",
-          }}
-        >
+        <div>
           <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[1].name}</h3>
           <p className={classes["stuff-price"]}>{DUMMY_DATA.items[1].price}$</p>
           <p className={classes["stuff-desc"]}>
             {DUMMY_DATA.items[1].desciption}
           </p>
-          <a href={DUMMY_DATA.items[1].shopAddress}>go to parchase site</a>
+          <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
         </div>
-      )}
+      </div>
     </div>
   );
 };

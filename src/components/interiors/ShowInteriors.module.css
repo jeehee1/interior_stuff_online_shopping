@@ -1,5 +1,8 @@
 .img-frame {
     margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
     position: relative;
     text-align: center;
 }
@@ -14,4 +17,8 @@
 
 .stuff-desc {
     margin: 0;
+}
+
+.interior-info {
+    margin-left: 1rem;
 }
