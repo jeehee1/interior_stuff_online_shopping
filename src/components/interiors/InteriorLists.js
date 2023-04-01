@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import classes from "./InteriorLists.module.css";
 
 const DUMMY_DATA = [
@@ -104,6 +105,11 @@ const InteriorLists = () => {
 
   return (
     <div className={classes["interior-list"]}>
+      <div>
+        <Link to="/interiors/new" className={classes.btn}>
+          Register new Interior Design
+        </Link>
+      </div>
       <ul>{lists}</ul>
     </div>
   );

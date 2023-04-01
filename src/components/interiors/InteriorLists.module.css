@@ -1,46 +1,64 @@
 .interior-list {
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .interior-list ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .interior-list li {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
-    border-radius: 6px;
-    width: 16rem;
-    height: 22rem;
-    margin: 1rem 1rem;
-    transition: 0.3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+  width: 16rem;
+  height: 22rem;
+  margin: 1rem 1rem;
+  transition: 0.3s;
 }
 
 .interior-list img {
-    margin: 0.3rem auto;
-    height: 14rem;
-    width: 90%;
-    object-fit: contain;
-    border-radius: 4px;
+  margin: 0.3rem auto;
+  height: 14rem;
+  width: 90%;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .interior-list h4 {
-    margin: 0.2rem 0;
-    color:#4b4a4a;
-    font-weight: bold;
+  margin: 0.2rem 0;
+  color: #4b4a4a;
+  font-weight: bold;
 }
 
 .interior-list p {
-    margin: 0.2rem 0;
-    color:#4b4a4a;
+  margin: 0.2rem 0;
+  color: #4b4a4a;
+}
+
+.btn {
+  display: inline-block;
+  text-decoration: none;
+  font: inherit;
+  padding: 0.8rem 1rem;
+  background-color: #80a56e;
+  border: 1px solid #80a56e;
+  border-radius: 4px;
+  color: #fffdfd;
 }
 
 .interior-list li:hover {
-    cursor: pointer;
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.5);
+}
+
+.btn:hover {
+  cursor: pointer;
+  background-color: #6c8b5c;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
 }
