@@ -1,7 +1,7 @@
-import classes from "./MainNavigation.module.css";
+import classes from "./SideNavigation.module.css";
 import { NavLink } from "react-router-dom";
 
-const MainNavigation = () => {
+const SideNavigation = () => {
   return (
     <header className={classes.header}>
       <nav>
@@ -30,4 +30,4 @@ const MainNavigation = () => {
   );
 };
 
-export default MainNavigation;
+export default SideNavigation;
