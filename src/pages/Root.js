@@ -1,5 +1,3 @@
-import classes from "./RootLayout.module.css";
-import MainNavigation from "../components/layout/SideNavigation";
 import { Outlet } from "react-router-dom";
 import SideNavigation from "../components/layout/SideNavigation";
 
