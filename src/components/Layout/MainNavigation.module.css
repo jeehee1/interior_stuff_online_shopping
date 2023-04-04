@@ -8,6 +8,7 @@
 }
 
 .nav {
+    list-style: none;
     display: flex;
     gap: 2rem;
 }
@@ -19,7 +20,8 @@
     text-decoration: none;
 }
 
-.nav .active {
+.nav .active,
+.nav a:hover {
     color: #796c6c;
     text-decoration: underline;
 }
