@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInteriors.module.css";
-import Card from '../layout/Card'
+import Card from "../layout/Card";
+import { useParams } from "react-router-dom";
 
 const DUMMY_DATA = {
   imgUrl:
@@ -132,9 +133,9 @@ const ShowInteriors = () => {
           </div>
         )}
       </div>
-      <div className={classes['interior-info']}>
+      <div className={classes["interior-info"]}>
         <div>
-            <p>image information : It's fancy living room.</p>
+          <p>image information : It's fancy living room.</p>
         </div>
         <Card>
           <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[0].name}</h3>

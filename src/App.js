@@ -2,8 +2,8 @@ import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import InteriorList from "./components/interiors/InteriorLists";
 import RootLayout from "./pages/Root";
-import ShowInteriors from "./components/interiors/ShowInteriors";
 import ErrorPage from "./pages/Error";
+import InteriorsDetailPage from "./pages/InteriorsDetail";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +14,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <InteriorList /> },
       { path: "/interiors", element: <InteriorList /> },
-      { path: "/interiors/details", element: <ShowInteriors /> },
+      { path: "/interiors/:interiorsId", element: <InteriorsDetailPage /> },
     ],
   },
 ]);
