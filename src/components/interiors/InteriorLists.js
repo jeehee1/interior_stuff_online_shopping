@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import classes from "./InteriorLists.module.css";
 
 const DUMMY_DATA = [
@@ -92,10 +92,14 @@ const DUMMY_DATA = [
 ];
 
 const InteriorLists = () => {
+  const navigate = useNavigate();
   const lists = [];
   DUMMY_DATA.map((data) => {
     lists.push(
-      <li key={data.info.id}>
+      <li
+        key={data.info.id}
+        onClick={() => navigate(`/interiors/${data.info.id}`)}
+      >
         <img src={data.info.imgUrl} />
         <h4>{data.info.imgName}</h4>
         <p>{data.info.imgDesc}</p>
