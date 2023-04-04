@@ -1,11 +1,16 @@
+import MainNavigation from "../components/layout/MainNavigation";
+
 const ErrorPage = () => {
   return (
-    <main>
-      <div>
-        <h1>Something went wrong...</h1>
-        <p>couldn't found page.</p>
-      </div>
-    </main>
+    <>
+      <MainNavigation />
+      <main>
+        <div>
+          <h1>Something went wrong...</h1>
+          <p>couldn't found page.</p>
+        </div>
+      </main>
+    </>
   );
 };
 

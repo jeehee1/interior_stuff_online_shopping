@@ -1,16 +1,27 @@
 .header {
   width: 180px;
   padding: 3rem 0;
-  background-color: aqua;
 }
 
-.nav-list {
+.nav {
     width: 100%;
     list-style: none;
     padding: 0;
 }
 
-.nav-list li {
-  font: inherit;
+.nav li {
   margin: 1rem 0;
+}
+
+.nav a {
+  font: inherit;
+  font-weight: 600;
+  color: #979797;
+  text-decoration: none;
+  margin: 1rem 0;
+}
+
+.nav .active {
+  color: #817676;
+  text-decoration: underline;
 }

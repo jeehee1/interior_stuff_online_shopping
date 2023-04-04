@@ -1,28 +1,28 @@
 import classes from "./SideNavigation.module.css";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const SideNavigation = () => {
   return (
     <header className={classes.header}>
       <nav>
-        <ul className={classes["nav-list"]}>
+        <ul className={classes.nav}>
           <li>
-            <a href="/">HOME</a>
+            <Link to="/interiors">All</Link>
           </li>
           <li>
-            <a href="/livingroom">LIVING ROOM</a>
+            <Link to="/interiors?type=livingroom">LIVING ROOM</Link>
           </li>
           <li>
-            <a href="/kitchen">KITCHEN</a>
+            <Link to="/interiors?type=kitchen">KITCHEN</Link>
           </li>
           <li>
-            <a href="bedroom">BED ROOM</a>
+            <Link to="/interiors?type=bedroom">BED ROOM</Link>
           </li>
           <li>
-            <a href="library">LIBRARY</a>
+            <Link to="/interiors?type=library">LIBRARY</Link>
           </li>
           <li>
-            <a href="bathroom">BATHROOM</a>
+            <Link to="/interiors?type=bathroom">BATHROOM</Link>
           </li>
         </ul>
       </nav>
