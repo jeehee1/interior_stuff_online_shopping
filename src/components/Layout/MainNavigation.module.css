@@ -1,0 +1,25 @@
+.header {
+    max-width: 60rem;
+    margin: auto;
+    padding: 1rem 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav a {
+    color: #939393;
+    
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.nav .active {
+    color: #796c6c;
+    text-decoration: underline;
+}
