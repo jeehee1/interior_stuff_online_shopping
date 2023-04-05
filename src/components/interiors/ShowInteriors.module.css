@@ -1,11 +1,14 @@
 .img-frame {
-    margin: 0 auto;
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    margin: 0 auto;
     position: relative;
     text-align: center;
     justify-content: center;
+}
+
+.img {
+    padding: 0;
+    margin: 0;
 }
 
 .stuff-title {
@@ -20,6 +23,11 @@
     margin: 0;
 }
 
-.interior-info {
-    margin-left: 1rem;
+@media(max-width: 60rem) {
+    .img-frame {
+        display: flex;
+        flex-direction: column;
+    }
+
 }
+

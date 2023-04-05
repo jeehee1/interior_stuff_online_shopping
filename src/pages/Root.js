@@ -8,7 +8,7 @@ const RootLayout = () => {
       <MainNavigation />
       <h1>DESIGN your House</h1>
       <main>
-        <SideNavigation />
+        <SideNavigation/>
         <Outlet />
       </main>
     </>

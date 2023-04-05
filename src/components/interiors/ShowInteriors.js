@@ -3,7 +3,8 @@ import { useState } from "react";
 import classes from "./ShowInteriors.module.css";
 import Card from "../layout/Card";
 import { useParams } from "react-router-dom";
-
+import ShowInteriorsItems from "./ShowInteriorsDetail";
+import SideNavigation from "../layout/SideNavigation";
 
 const DUMMY_DATA = {
   imgUrl:
@@ -79,33 +80,34 @@ const ShowInteriors = (props) => {
   };
 
   const interiorsInfo = props.info[0].info;
-  console.log(interiorsInfo)
+  console.log(interiorsInfo);
 
   const displayInfo = [];
-  interiorsInfo.items.map(item => displayInfo.push(<div
-    onMouseOver={showStuffInfoHandler}
-    onMouseOut={hideStuffInfoHandler}
-    style={{
-      position: "absolute",
-      left: `${item.coorX}px`,
-      top: `${item.coorY}px`,
-      background: "#8e8e8e66",
-      color: "white",
-      borderRadius: "4px",
-    }}
-  >
-    <h3 className={classes["stuff-title"]}>
-      {item.name}
-    </h3>
-    <p className={classes["stuff-price"]}>
-      {item.price}$
-    </p>
-    <a href={item.shopAddress}>go to parchase site</a>
-  </div>))
+  interiorsInfo.items.map((item) =>
+    displayInfo.push(
+      <div
+        onMouseOver={showStuffInfoHandler}
+        onMouseOut={hideStuffInfoHandler}
+        style={{
+          position: "absolute",
+          left: `${item.coorX}px`,
+          top: `${item.coorY}px`,
+          background: "#8e8e8e66",
+          color: "white",
+          borderRadius: "4px",
+          justifyContent: "center",
+        }}
+      >
+        <h3 className={classes["stuff-title"]}>{item.name}</h3>
+        <p className={classes["stuff-price"]}>{item.price}$</p>
+        <a href={item.shopAddress}>go for shopping</a>
+      </div>
+    )
+  );
 
   return (
     <div className={classes["img-frame"]} key={interiorsInfo.id}>
-      <div>
+      <div className={classes.img}>
         <img
           onMouseOver={showStuffInfoHandler}
           onMouseOut={hideStuffInfoHandler}
@@ -116,27 +118,10 @@ const ShowInteriors = (props) => {
         />
         {showInfo && displayInfo}
       </div>
-      <div className={classes["interior-info"]}>
-        <div>
-          <p>{interiorsInfo.imgDesc}</p>
-        </div>
-        <Card>
-          <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[0].name}</h3>
-          <p className={classes["stuff-price"]}>{DUMMY_DATA.items[0].price}$</p>
-          <p className={classes["stuff-desc"]}>
-            {DUMMY_DATA.items[0].desciption}
-          </p>
-          <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
-        </Card>
-        <Card>
-          <h3 className={classes["stuff-title"]}>{DUMMY_DATA.items[1].name}</h3>
-          <p className={classes["stuff-price"]}>{DUMMY_DATA.items[1].price}$</p>
-          <p className={classes["stuff-desc"]}>
-            {DUMMY_DATA.items[1].desciption}
-          </p>
-          <a href={DUMMY_DATA.items[0].shopAddress}>go to parchase site</a>
-        </Card>
-      </div>
+      <ShowInteriorsItems
+        imgInfo={{ name: interiorsInfo.imgName, desc: interiorsInfo.imgDesc }}
+        items={interiorsInfo.items}
+      />
     </div>
   );
 };
