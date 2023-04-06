@@ -1,10 +1,10 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import InteriorList from "./components/interiors/InteriorLists";
+import InteriorDesignLists from "./components/interiors/InteriorDesignLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
-import InteriorsDetailPage from "./pages/InteriorsDetail";
-import NewInteriors from "./components/interiors/NewInteriors";
+import InteriorDesignDetailPage from "./pages/InteriorDesignDetail";
+import NewInteriorDesign from "./components/interiors/NewInteriorDesign";
 
 const router = createBrowserRouter([
   {
@@ -13,10 +13,10 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     id: "root",
     children: [
-      { index: true, element: <InteriorList /> },
-      { path: "/interiors", element: <InteriorList /> },
-      { path: "/interiors/new", element: <NewInteriors /> },
-      { path: "/interiors/:interiorsId", element: <InteriorsDetailPage /> },
+      { index: true, element: <InteriorDesignLists /> },
+      { path: "/interiors", element: <InteriorDesignLists /> },
+      { path: "/interiors/new", element: <NewInteriorDesign /> },
+      { path: "/interiors/:interiorsId", element: <InteriorDesignDetailPage /> },
     ],
   },
 ]);

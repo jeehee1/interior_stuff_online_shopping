@@ -1,13 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useState } from "react";
-import classes from "./ShowInteriors.module.css";
-import Card from "../layout/Card";
-import { useParams } from "react-router-dom";
-import ShowInteriorsItems from "./ShowInteriorsDetail";
-import SideNavigation from "../layout/SideNavigation";
+import classes from "./ShowInteriorDesign.module.css";
+import ShowInteriorsItems from "./ShowInteriorDesignDetail";
 
 
-const ShowInteriors = (props) => {
+const ShowInteriorDesign = (props) => {
   const [showInfo, setShowInfo] = useState(false);
   const [offset, setOffset] = useState({
     top: null,
@@ -16,10 +13,6 @@ const ShowInteriors = (props) => {
     height: null,
   });
 
-  const [textCoor, setTextCoor] = useState({
-    textX: 0,
-    textY: 0,
-  });
   const imgRef = useRef();
 
   // useEffect(() => {}, [imgRef]);
@@ -44,7 +37,7 @@ const ShowInteriors = (props) => {
   };
 
   //get coordinates when clicking at some point of the image.
-  const getCoordinagesHandler = (event) => {
+  const getCoordinatesHandler = (event) => {
     event.preventDefault();
     const x = event.pageX - offset.left;
     const y = event.pageY - window.pageYOffset - offset.top;
@@ -57,11 +50,11 @@ const ShowInteriors = (props) => {
     console.log(x, y);
   };
 
-  const interiorsInfo = props.info[0];
-  console.log(interiorsInfo);
+  const interiorDesignInfo = props.info[0];
+  console.log(interiorDesignInfo);
 
   const displayInfo = [];
-  interiorsInfo.items.map((item) =>
+  interiorDesignInfo.items.map((item) =>
     displayInfo.push(
       <div
         onMouseOver={showStuffInfoHandler}
@@ -84,24 +77,24 @@ const ShowInteriors = (props) => {
   );
 
   return (
-    <div className={classes["img-frame"]} key={interiorsInfo.id}>
+    <div className={classes["img-frame"]} key={interiorDesignInfo.id}>
       <div className={classes.img}>
         <img
           onMouseOver={showStuffInfoHandler}
           onMouseOut={hideStuffInfoHandler}
-          onClick={getCoordinagesHandler}
-          src={interiorsInfo.imgUrl}
+          onClick={getCoordinatesHandler}
+          src={interiorDesignInfo.imgUrl}
           alt="cannot load the image."
           ref={imgRef}
         />
         {showInfo && displayInfo}
       </div>
       <ShowInteriorsItems
-        imgInfo={{ name: interiorsInfo.imgName, desc: interiorsInfo.imgDesc }}
-        items={interiorsInfo.items}
+        imgInfo={{ name: interiorDesignInfo.imgName, desc: interiorDesignInfo.imgDesc }}
+        items={interiorDesignInfo.items}
       />
     </div>
   );
 };
 
-export default ShowInteriors;
+export default ShowInteriorDesign;

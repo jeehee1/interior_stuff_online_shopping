@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import classes from "./InteriorLists.module.css";
+import classes from "./InteriorDesignLists.module.css";
 
 const DUMMY_DATA = [
   {
@@ -91,7 +91,7 @@ const DUMMY_DATA = [
   },
 ];
 
-const InteriorLists = () => {
+const InteriorDesignLists = () => {
   const navigate = useNavigate();
   const lists = [];
   DUMMY_DATA.map((data) => {
@@ -117,4 +117,4 @@ const InteriorLists = () => {
   );
 };
 
-export default InteriorLists;
+export default InteriorDesignLists;

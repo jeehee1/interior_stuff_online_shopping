@@ -1,8 +1,8 @@
-import classes from "./ShowInteriorsDetail.module.css";
+import classes from "./ShowInteriorDesign.module.css";
 
 import Card from "../layout/Card";
 
-const ShowInteriorsDetail = (props) => {
+const ShowInteriorDesignDetail = (props) => {
   const imgInfo = props.imgInfo;
   const items = props.items;
 
@@ -28,4 +28,4 @@ const ShowInteriorsDetail = (props) => {
   );
 };
 
-export default ShowInteriorsDetail;
+export default ShowInteriorDesignDetail;

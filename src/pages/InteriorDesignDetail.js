@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import ShowInteriors from "../components/interiors/ShowInteriors";
+import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
 
 const DUMMY_DATA = [
   {
@@ -85,20 +85,18 @@ const DUMMY_DATA = [
   },
 ];
 
-const InteriorsDetailPage = () => {
+const InteriorDesignDetailPage = () => {
   const params = useParams();
   const interiorsId = parseInt(params.interiorsId);
 
-  const interiorsInfo = DUMMY_DATA.filter(
-    (data) => data.id === interiorsId
-  );
+  const interiorsInfo = DUMMY_DATA.filter((data) => data.id === interiorsId);
 
   return (
     <>
       <p>{interiorsId}</p>
-      <ShowInteriors info={interiorsInfo} />
+      <ShowInteriorDesign info={interiorsInfo} />
     </>
   );
 };
 
-export default InteriorsDetailPage;
+export default InteriorDesignDetailPage;

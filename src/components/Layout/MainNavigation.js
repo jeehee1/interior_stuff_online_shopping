@@ -23,7 +23,7 @@ const MainNavigation = () => {
                 isActive ? classes.active : undefined
               }
             >
-              INTERIORS
+              INTERIOR DESIGN LISTS
             </NavLink>
           </li>
           <li>
@@ -43,7 +43,7 @@ const MainNavigation = () => {
                 isActive ? classes.active : undefined
               }
             >
-              DETAILS
+              DETAIL
             </NavLink>
           </li>
         </ul>
