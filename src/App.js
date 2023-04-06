@@ -4,6 +4,7 @@ import InteriorList from "./components/interiors/InteriorLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import InteriorsDetailPage from "./pages/InteriorsDetail";
+import NewInteriors from "./components/interiors/NewInteriors";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <InteriorList /> },
       { path: "/interiors", element: <InteriorList /> },
+      { path: "/interiors/new", element: <NewInteriors /> },
       { path: "/interiors/:interiorsId", element: <InteriorsDetailPage /> },
     ],
   },
