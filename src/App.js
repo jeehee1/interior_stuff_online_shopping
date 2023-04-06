@@ -1,6 +1,6 @@
 import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import InteriorDesignLists from "./components/interiors/InteriorDesignLists";
+import InteriorDesignLists from "./pages/InteriorDesignLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import InteriorDesignDetailPage from "./pages/InteriorDesignDetail";
