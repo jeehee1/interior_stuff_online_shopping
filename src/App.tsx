@@ -1,4 +1,3 @@
-import React from "react";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import InteriorDesignLists from "./pages/InteriorDesignLists";
 import RootLayout from "./pages/Root";

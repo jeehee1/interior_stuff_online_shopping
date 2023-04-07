@@ -2,11 +2,23 @@ import classes from "./ShowInteriorDesign.module.css";
 
 import Card from "../layout/Card";
 
-const ShowInteriorDesignDetail = (props) => {
-  const imgInfo = props.imgInfo;
+const ShowInteriorDesignDetail = (props: {
+  imgInfo: {
+    name: string;
+    desc: string;
+  };
+  items: {
+    name: string;
+    price: number;
+    desciption: string;
+    shopAddress: string;
+    coorX: number;
+    coorY: number;
+  }[];
+}) => {
   const items = props.items;
 
-  const itemLists = [];
+  const itemLists: any = [];
   items.map((item) => {
     itemLists.push(
       <Card>
@@ -21,7 +33,8 @@ const ShowInteriorDesignDetail = (props) => {
   return (
     <div className={classes["interior-info"]}>
       <div>
-        <p>{imgInfo.desc}</p>
+        <h4>{props.imgInfo.name}</h4>
+        <p>{props.imgInfo.desc}</p>
       </div>
       {itemLists}
     </div>

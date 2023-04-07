@@ -1,4 +1,5 @@
-import ShowDesignLists from "../components/interiors/ShowDesignLists";
+import { useParams } from "react-router-dom";
+import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
 
 const DUMMY_DATA = [
   {
@@ -84,18 +85,42 @@ const DUMMY_DATA = [
   },
 ];
 
-const InteriorDesignLists = () => {
-  const formattedDesigns = [];
-  DUMMY_DATA.map((data) =>
-    formattedDesigns.push({
-      id: data.id,
-      imgUrl: data.imgUrl,
-      imgDesc: data.imgDesc,
-      imgName: data.imgName,
-    })
-  );
-
-  return <ShowDesignLists designs={formattedDesigns} />;
+const ZERO_DATA = {
+  type: "-",
+  id: -1,
+  imgType: "-",
+  imgName: "-",
+  imgDesc: "-",
+  imgUrl:
+    "https://images.unsplash.com/photo-1593670755950-603e1d6184b9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=763&q=80",
+  items: [
+    {
+      name: "-",
+      price: 0,
+      desciption: "-",
+      shopAddress: "-",
+      coorX: 0,
+      coorY: 0,
+    },
+  ],
 };
 
-export default InteriorDesignLists;
+const InteriorDesignDetailPage = () => {
+  const { interiorsId } = useParams<{ interiorsId: string }>();
+  const intInteriorsId: number = interiorsId ? parseInt(interiorsId) : -1;
+
+  if(intInteriorsId === -1) {
+    throw new Error("interiors not fhound");
+    }
+
+  const interiorsInfo = DUMMY_DATA.filter((data) => data.id === intInteriorsId);
+
+  return (
+    <>
+      <p>{interiorsId}</p>
+      <ShowInteriorDesign info={interiorsInfo[0]} />
+    </>
+  );
+};
+
+export default InteriorDesignDetailPage;

@@ -1,19 +1,42 @@
 import React, { useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInteriorDesign.module.css";
-import ShowInteriorsItems from "./ShowInteriorDesignDetail";
+import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
 
+type Offset = {
+  top: number | null;
+  left: number | null;
+  width: number | null;
+  height: number | null;
+};
 
-const ShowInteriorDesign = (props) => {
+const ShowInteriorDesign = (props: {
+  info: {
+    type: string;
+    id: number;
+    imgType: string;
+    imgName: string;
+    imgDesc: string;
+    imgUrl: string;
+    items: {
+      name: string;
+      price: number;
+      desciption: string;
+      shopAddress: string;
+      coorX: number;
+      coorY: number;
+    }[];
+  };
+}) => {
   const [showInfo, setShowInfo] = useState(false);
-  const [offset, setOffset] = useState({
+  const [offset, setOffset] = useState<Offset>({
     top: null,
     left: null,
     width: null,
     height: null,
   });
 
-  const imgRef = useRef();
+  const imgRef = useRef<HTMLImageElement>(null);
 
   // useEffect(() => {}, [imgRef]);
   // console.log(offset);
@@ -21,7 +44,7 @@ const ShowInteriorDesign = (props) => {
   const showStuffInfoHandler = () => {
     setShowInfo(true);
 
-    const curImgOffset = imgRef.current.getBoundingClientRect();
+    const curImgOffset = imgRef.current!.getBoundingClientRect();
     console.log(curImgOffset);
     setOffset({
       top: curImgOffset.top,
@@ -37,10 +60,10 @@ const ShowInteriorDesign = (props) => {
   };
 
   //get coordinates when clicking at some point of the image.
-  const getCoordinatesHandler = (event) => {
+  const getCoordinatesHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    const x = event.pageX - offset.left;
-    const y = event.pageY - window.pageYOffset - offset.top;
+    const x = offset.left ? event.pageX - offset.left : -1;
+    const y = offset.top ? event.pageY - window.pageYOffset - offset.top : -1;
 
     console.log("offset x : " + offset.left);
     console.log("offset y : " + offset.top);
@@ -50,10 +73,10 @@ const ShowInteriorDesign = (props) => {
     console.log(x, y);
   };
 
-  const interiorDesignInfo = props.info[0];
+  const interiorDesignInfo = props.info;
   console.log(interiorDesignInfo);
 
-  const displayInfo = [];
+  const displayInfo: any = [];
   interiorDesignInfo.items.map((item) =>
     displayInfo.push(
       <div
@@ -89,8 +112,11 @@ const ShowInteriorDesign = (props) => {
         />
         {showInfo && displayInfo}
       </div>
-      <ShowInteriorsItems
-        imgInfo={{ name: interiorDesignInfo.imgName, desc: interiorDesignInfo.imgDesc }}
+      <ShowInteriorDesignDetail
+        imgInfo={{
+          name: interiorDesignInfo.imgName,
+          desc: interiorDesignInfo.imgDesc,
+        }}
         items={interiorDesignInfo.items}
       />
     </div>

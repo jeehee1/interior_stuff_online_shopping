@@ -1,5 +1,4 @@
-import { useParams } from "react-router-dom";
-import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
+import ShowDesignLists from "../components/interiors/ShowDesignLists";
 
 const DUMMY_DATA = [
   {
@@ -85,18 +84,26 @@ const DUMMY_DATA = [
   },
 ];
 
-const InteriorDesignDetailPage = () => {
-  const params = useParams();
-  const interiorsId = parseInt(params.interiorsId);
+type designsObject = {
+    id: number;
+    imgUrl: string;
+    imgDesc: string;
+    imgName: string;
+  }[];
 
-  const interiorsInfo = DUMMY_DATA.filter((data) => data.id === interiorsId);
-
-  return (
-    <>
-      <p>{interiorsId}</p>
-      <ShowInteriorDesign info={interiorsInfo} />
-    </>
+const InteriorDesignLists = () => {
+  const formattedDesigns: designsObject = [];
+  
+  DUMMY_DATA.map((data) =>
+    formattedDesigns.push({
+      id: data.id,
+      imgUrl: data.imgUrl,
+      imgDesc: data.imgDesc,
+      imgName: data.imgName,
+    })
   );
+
+  return <ShowDesignLists designs={formattedDesigns} />;
 };
 
-export default InteriorDesignDetailPage;
+export default InteriorDesignLists;
