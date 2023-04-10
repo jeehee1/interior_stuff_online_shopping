@@ -1,41 +1,66 @@
-import React, { useState } from "react";
+import React, { useReducer, useState } from "react";
 import classes from "./NewInteriorDesign.module.css";
 
-import Select from "react-select";
+import RegisterImageForm from "./RegisterImageForm";
 
-const roomTypeOptions = [
-  { value: "kitchen", label: "kitchen" },
-  { value: "bedroom", label: "bedroom" },
-  { value: "livingroom", label: "livingroom" },
-  { value: "library", label: "library" },
-  { value: "bathroom", label: "bathroom" },
-];
+type InteriorDesignObject = {
+  stage: number;
+  imgType: string;
+  imgName: string;
+  imgDesc: string;
+  imgUrl: string;
+  items: InteriorDesignItemObject[];
+};
+
+type InteriorDesignItemObject = {
+  itemName: string;
+  itemPrice: number;
+  itemDesc: string;
+  itemAddress: string;
+  itemCoorX: number;
+  itemCoorY: number;
+};
 
 const NewInteriorDesign = () => {
-  // const [interiorsInfo, , setInteriorsInfo] = useState({
-  //   type: null,
-  //   imgUrl: null,
-  // });
-  const [page, setPage] = useState();
-  // const [{imgUrl: "", imgCoorX: null, items: []}] = useReducer();
+  const [newInteriorDesign, setNewInteriorDesign] =
+    useState<InteriorDesignObject>({
+      stage: 0,
+      imgType: "",
+      imgName: "",
+      imgDesc: "",
+      imgUrl: "",
+      items: [],
+    });
 
-  // set type and img url => set img name and desc => set items coordinates => set items info;
+  const newImageHandler = (
+    type: string,
+    name: string,
+    desc: string,
+    url: string
+  ) => {
+    setNewInteriorDesign({
+      stage: 0,
+      imgType: type,
+      imgName: name,
+      imgDesc: desc,
+      imgUrl: url,
+      items: [],
+    });
+  };
+  console.log(newInteriorDesign);
 
-  return (
-    <div className={classes["new-design"]}>
-      <form>
-        <div>
-          <label htmlFor="type">Room Type</label>
-          <Select id="type" options={roomTypeOptions} />
-        </div>
-        <div>
-          <label htmlFor="img">Interior Design Image Url</label>
-          <input id="img" type="text" />
-        </div>
-      </form>
-      <button>Next</button>
-    </div>
-  );
+  let stageComponent = null;
+  switch (newInteriorDesign.stage) {
+    case 0:
+      stageComponent = <RegisterImageForm onAddNewImage={newImageHandler} />;
+      break;
+    case 1:
+      break;
+    default:
+      break;
+  }
+
+  return <div className={classes["new-design"]}>{stageComponent}</div>;
 };
 
 export default NewInteriorDesign;
