@@ -1,0 +1,44 @@
+.register {
+    display: flex;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+    justify-content: center;
+    gap: 1rem;
+    font:inherit;
+}
+
+.caption {
+  position: absolute;
+  display: block;
+  background-color: rgba(128, 128, 128, 0.46);
+  padding: 0 1rem;
+  color: white;
+  margin: 0 auto;
+}
+
+.image {
+  max-width: 1200px;
+}
+
+.caption p {
+  font: inhterit;
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.stuff-title {
+    margin: 1rem 1rem 0 1rem;
+}
+
+.stuff-price {
+    margin: 0;
+}
+
+.stuff-desc {
+    margin: 0 0 1rem 0;
+}
+
+.image:hover {
+  cursor: pointer;
+}

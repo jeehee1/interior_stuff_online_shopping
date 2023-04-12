@@ -1,5 +1,7 @@
-import { useRef, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Select from "react-select";
+import { DesignContext } from "../../store/design-context";
+import DesignImg from "../../models/designimg";
 
 const roomTypeOptions = [
   { value: "kitchen", label: "kitchen" },
@@ -9,18 +11,21 @@ const roomTypeOptions = [
   { value: "bathroom", label: "bathroom" },
 ];
 
-type AddImageFunc = {
-  onAddNewImage(type: string, name: string, desc: string, url: string): void;
-};
+// type AddImageFunc = {
+//   onAddNewImage(type: string, name: string, desc: string, url: string): void;
+// };
 
-const RegisterImageForm = ({ onAddNewImage }: AddImageFunc) => {
+const RegisterImageForm = (props: { onNextStage: () => void }) => {
   const [selectedType, setSelectedType] = useState<{
     value: string;
     label: string;
   }>();
+
   const imgUrlRef = useRef<HTMLInputElement>(null!);
   const imgNameRef = useRef<HTMLInputElement>(null!);
   const imgDescRef = useRef<HTMLInputElement>(null!);
+
+  const designCtx = useContext(DesignContext);
 
   const addNewDesignInfo = () => {
     console.log(
@@ -29,13 +34,16 @@ const RegisterImageForm = ({ onAddNewImage }: AddImageFunc) => {
       imgNameRef.current.value,
       imgDescRef.current.value
     );
-    onAddNewImage(
-      selectedType!.value,
-      imgNameRef.current.value,
-      imgDescRef.current.value,
-      imgUrlRef.current.value
-    );
+
+    const type = selectedType ? selectedType.value : "-";
+    const name = imgNameRef.current.value;
+    const desc = imgDescRef.current.value;
+    const url = imgUrlRef.current.value;
+
+    designCtx.addImage(new DesignImg(type, name, desc, url));
+    props.onNextStage();
   };
+  console.log(designCtx.interiorDesign);
 
   return (
     <>

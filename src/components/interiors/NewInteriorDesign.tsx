@@ -1,7 +1,12 @@
-import React, { useReducer, useState } from "react";
+import React, { useContext, useEffect, useReducer, useState } from "react";
 import classes from "./NewInteriorDesign.module.css";
 
 import RegisterImageForm from "./RegisterImageForm";
+import RegisterItemsForm from "./RegisterItemsForm";
+import DesignContextProvider, {
+  DesignContext,
+} from "../../store/design-context";
+import Design from "../../models/design";
 
 type InteriorDesignObject = {
   stage: number;
@@ -22,45 +27,31 @@ type InteriorDesignItemObject = {
 };
 
 const NewInteriorDesign = () => {
-  const [newInteriorDesign, setNewInteriorDesign] =
-    useState<InteriorDesignObject>({
-      stage: 0,
-      imgType: "",
-      imgName: "",
-      imgDesc: "",
-      imgUrl: "",
-      items: [],
-    });
-
-  const newImageHandler = (
-    type: string,
-    name: string,
-    desc: string,
-    url: string
-  ) => {
-    setNewInteriorDesign({
-      stage: 0,
-      imgType: type,
-      imgName: name,
-      imgDesc: desc,
-      imgUrl: url,
-      items: [],
-    });
-  };
-  console.log(newInteriorDesign);
+  const [stage, setStage] = useState<number>(0);
+  const designCtx = useContext(DesignContext);
 
   let stageComponent = null;
-  switch (newInteriorDesign.stage) {
+  switch (stage) {
     case 0:
-      stageComponent = <RegisterImageForm onAddNewImage={newImageHandler} />;
+      stageComponent = <RegisterImageForm onNextStage={() => setStage(1)} />;
       break;
     case 1:
+      stageComponent = <RegisterItemsForm onNextStage={() => setStage(2)} />;
+      break;
+    case 2:
+      stageComponent = (
+        <p>Save Successfully! {designCtx.interiorDesign.img.imgName}</p>
+      );
       break;
     default:
       break;
   }
 
-  return <div className={classes["new-design"]}>{stageComponent}</div>;
+  return (
+    <DesignContextProvider>
+      <div className={classes["new-design"]}>{stageComponent}</div>
+    </DesignContextProvider>
+  );
 };
 
 export default NewInteriorDesign;

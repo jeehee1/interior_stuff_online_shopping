@@ -3,12 +3,7 @@ import { useState } from "react";
 import classes from "./ShowInteriorDesign.module.css";
 import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
 
-type Offset = {
-  top: number | null;
-  left: number | null;
-  width: number | null;
-  height: number | null;
-};
+
 
 const ShowInteriorDesign = (props: {
   info: {
@@ -29,12 +24,7 @@ const ShowInteriorDesign = (props: {
   };
 }) => {
   const [showInfo, setShowInfo] = useState(false);
-  const [offset, setOffset] = useState<Offset>({
-    top: null,
-    left: null,
-    width: null,
-    height: null,
-  });
+
 
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -44,14 +34,6 @@ const ShowInteriorDesign = (props: {
   const showStuffInfoHandler = () => {
     setShowInfo(true);
 
-    const curImgOffset = imgRef.current!.getBoundingClientRect();
-    console.log(curImgOffset);
-    setOffset({
-      top: curImgOffset.top,
-      left: curImgOffset.left,
-      width: curImgOffset.width,
-      height: curImgOffset.height,
-    });
   };
 
   const hideStuffInfoHandler = () => {
@@ -59,19 +41,7 @@ const ShowInteriorDesign = (props: {
     console.log("hide info");
   };
 
-  //get coordinates when clicking at some point of the image.
-  const getCoordinatesHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    const x = offset.left ? event.pageX - offset.left : -1;
-    const y = offset.top ? event.pageY - window.pageYOffset - offset.top : -1;
-
-    console.log("offset x : " + offset.left);
-    console.log("offset y : " + offset.top);
-    console.log("point x : " + event.pageX);
-    console.log("point y : " + event.pageY);
-    console.log("scroll y : " + window.pageYOffset);
-    console.log(x, y);
-  };
+  
 
   const interiorDesignInfo = props.info;
   console.log(interiorDesignInfo);
@@ -105,7 +75,6 @@ const ShowInteriorDesign = (props: {
         <img
           onMouseOver={showStuffInfoHandler}
           onMouseOut={hideStuffInfoHandler}
-          onClick={getCoordinatesHandler}
           src={interiorDesignInfo.imgUrl}
           alt="cannot load the image."
           ref={imgRef}
