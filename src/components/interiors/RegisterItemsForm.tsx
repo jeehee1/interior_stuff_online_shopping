@@ -23,8 +23,11 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
 
   const addItemHandler = (event: React.MouseEvent) => {
     event.preventDefault();
-    setCaption(false);
     const curImgOffset = imgRef.current!.getBoundingClientRect();
+    // setTimeout(() => {
+    //   window.scrollTo(0, curImgOffset.height);
+    // }, 500);
+    setCaption(false);
     const x = event.pageX - window.pageXOffset - curImgOffset.left;
     const y = event.pageY - window.pageYOffset - curImgOffset.top;
 
@@ -100,12 +103,6 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
 
   return (
     <>
-      {designCtx.interiorDesign.items.length > 0 && coordinates.coorX === 0 && (
-        <div>
-          <p>If you want to add new item. Please click the image.</p>
-          <button onClick={saveDesignHandler}>Save</button>
-        </div>
-      )}
       <div className={classes.register}>
         {caption && (
           <div className={classes.caption}>
@@ -139,34 +136,40 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
             <p className={classes["stuff-desc"]}>shopping mall</p>
           </div>
         ) : null}
-        {(coordinates!.coorX > 0 || coordinates!.coorY > 0) && (
-          <>
-            <form ref={itemFormRef}>
-              <label>Item Name</label>
-              <input
-                type="text"
-                onChange={(event) =>
-                  setItemInfo({ ...itemInfo, name: event.currentTarget.value })
-                }
-              />
-              <label>Item Price</label>
-              <input
-                type="text"
-                onChange={(event) =>
-                  setItemInfo({
-                    ...itemInfo,
-                    price: parseInt(event.currentTarget.value),
-                  })
-                }
-              />
-              <label>Item Description</label>
-              <textarea ref={descRef} />
-              <label>Item Shopping Address</label>
-              <input type="text" ref={addressRef} />
-              <button onClick={newItemHandler}>Add Another Item</button>
-              <button>cancel add current Item</button>
-            </form>
-          </>
+      </div>
+      <div className={classes["item-form"]}>
+        {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
+          <form ref={itemFormRef}>
+            <label>Item Name</label>
+            <input
+              type="text"
+              autoFocus={true}
+              onChange={(event) =>
+                setItemInfo({ ...itemInfo, name: event.currentTarget.value })
+              }
+            />
+            <label>Item Price</label>
+            <input
+              type="text"
+              onChange={(event) =>
+                setItemInfo({
+                  ...itemInfo,
+                  price: parseInt(event.currentTarget.value),
+                })
+              }
+            />
+            <label>Item Description</label>
+            <textarea ref={descRef} />
+            <label>Item Shopping Address</label>
+            <input type="text" ref={addressRef} />
+            <button onClick={newItemHandler}>Save current Item</button>
+            <button>cancel addig current Item</button>
+          </form>
+        ) : (
+          <div>
+            <p>If you want to add a new item. Click the image again!</p>
+            <button onClick={saveDesignHandler}>Save this Design</button>
+          </div>
         )}
       </div>
     </>

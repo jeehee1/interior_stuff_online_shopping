@@ -1,3 +1,4 @@
+import classes from "./RegisterImageForm.module.css";
 import { useContext, useRef, useState } from "react";
 import Select from "react-select";
 import { DesignContext } from "../../store/design-context";
@@ -23,7 +24,7 @@ const RegisterImageForm = (props: { onNextStage: () => void }) => {
 
   const imgUrlRef = useRef<HTMLInputElement>(null!);
   const imgNameRef = useRef<HTMLInputElement>(null!);
-  const imgDescRef = useRef<HTMLInputElement>(null!);
+  const imgDescRef = useRef<HTMLTextAreaElement>(null!);
 
   const designCtx = useContext(DesignContext);
 
@@ -57,20 +58,20 @@ const RegisterImageForm = (props: { onNextStage: () => void }) => {
             onChange={(type) => setSelectedType(type!)}
           />
         </div>
-        <div>
+        <div className={classes.img}>
           <label htmlFor="img-url">Interior Design Image Url</label>
           <input id="img-url" type="text" ref={imgUrlRef} />
         </div>
-        <div>
+        <div className={classes.name}>
           <label htmlFor="img-name">Interior Design Name</label>
           <input id="img-name" type="text" ref={imgNameRef} />
         </div>
-        <div>
+        <div className={classes.desc}>
           <label htmlFor="img-desc">Interior Design Description</label>
-          <input id="img-desc" type="text" ref={imgDescRef} />
+          <textarea id="img-desc" ref={imgDescRef} />
         </div>
+      <button className={classes.btn} onClick={addNewDesignInfo}>Next</button>
       </form>
-      <button onClick={addNewDesignInfo}>Next</button>
     </>
   );
 };

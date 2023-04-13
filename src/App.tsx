@@ -3,7 +3,7 @@ import InteriorDesignLists from "./pages/InteriorDesignLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import InteriorDesignDetailPage from "./pages/InteriorDesignDetail";
-import NewInteriorDesign from "./components/interiors/NewInteriorDesign";
+import NewInteriorDesign from "./pages/NewInteriorDesign";
 
 const router = createBrowserRouter([
   {

@@ -1,30 +1,9 @@
-import React, { useContext, useEffect, useReducer, useState } from "react";
+import React, { useContext, useState } from "react";
 import classes from "./NewInteriorDesign.module.css";
 
-import RegisterImageForm from "./RegisterImageForm";
-import RegisterItemsForm from "./RegisterItemsForm";
-import DesignContextProvider, {
-  DesignContext,
-} from "../../store/design-context";
-import Design from "../../models/design";
-
-type InteriorDesignObject = {
-  stage: number;
-  imgType: string;
-  imgName: string;
-  imgDesc: string;
-  imgUrl: string;
-  items: InteriorDesignItemObject[];
-};
-
-type InteriorDesignItemObject = {
-  itemName: string;
-  itemPrice: number;
-  itemDesc: string;
-  itemAddress: string;
-  itemCoorX: number;
-  itemCoorY: number;
-};
+import RegisterImageForm from "../components/interiors/RegisterImageForm";
+import RegisterItemsForm from "../components/interiors/RegisterItemsForm";
+import DesignContextProvider, { DesignContext } from "../store/design-context";
 
 const NewInteriorDesign = () => {
   const [stage, setStage] = useState<number>(0);
