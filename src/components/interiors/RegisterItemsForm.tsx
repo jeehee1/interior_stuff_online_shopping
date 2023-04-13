@@ -15,6 +15,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     name: "",
     price: 0,
   });
+ 
 
   const [coordinates, setCoordinates] = useState<{
     coorX: number;
@@ -67,7 +68,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     ]);
     itemFormRef.current?.reset();
     setItemInfo({ name: "", price: 0 });
-    setCoordinates({ coorX: 0, coorY: 0, width: 0 });
+    setCoordinates({ ...coordinates, coorX: 0, coorY: 0 });
   };
   const [showItemsComp, setShowItesmsComp] = useState();
   console.log(coordinates.width);
@@ -112,6 +113,12 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     const data = await response.json();
 
     props.onNextStage();
+  };
+
+  const cancelItemHandler = () => {
+    itemFormRef.current?.reset();
+    setItemInfo({ name: "", price: 0 });
+    setCoordinates({ ...coordinates, coorX: 0, coorY: 0 });
   };
 
   return (
@@ -180,8 +187,8 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
               <textarea ref={descRef} />
               <label>Item Shopping Address</label>
               <input type="text" ref={addressRef} />
+              <button onClick={cancelItemHandler}>Cancel</button>
               <button onClick={newItemHandler}>Save current Item</button>
-              <button>cancel addig current Item</button>
             </form>
           ) : (
             <div>
