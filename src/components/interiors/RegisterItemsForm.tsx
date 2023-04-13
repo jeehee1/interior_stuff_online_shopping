@@ -19,7 +19,8 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
   const [coordinates, setCoordinates] = useState<{
     coorX: number;
     coorY: number;
-  }>({ coorX: 0, coorY: 0 });
+    width: number;
+  }>({ coorX: 0, coorY: 0, width: 0 });
 
   const addItemHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -34,6 +35,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     setCoordinates({
       coorX: x,
       coorY: y,
+      width: curImgOffset.width,
     });
   };
 
@@ -65,9 +67,10 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     ]);
     itemFormRef.current?.reset();
     setItemInfo({ name: "", price: 0 });
-    setCoordinates({ coorX: 0, coorY: 0 });
+    setCoordinates({ coorX: 0, coorY: 0, width: 0 });
   };
   const [showItemsComp, setShowItesmsComp] = useState();
+  console.log(coordinates.width);
 
   useEffect(() => {
     let showItems: any = [];
@@ -95,84 +98,100 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     setShowItesmsComp(showItems);
   }, [designCtx.interiorDesign]);
 
-  const saveDesignHandler = () => {
+  const saveDesignHandler = async () => {
     console.log(designCtx.interiorDesign);
-    designCtx.resetDesign();
+    const newDesign = designCtx.interiorDesign;
+    const response = await fetch(
+      "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json",
+      {
+        method: "POST",
+        body: JSON.stringify(newDesign),
+        headers: { "Content-Type": "application/json" },
+      }
+    );
+    const data = await response.json();
+
     props.onNextStage();
   };
 
   return (
-    <>
-      <div className={classes.register}>
-        {caption && (
-          <div className={classes.caption}>
-            <p>click the location in image to display an item description.</p>
-          </div>
-        )}
-        <img
-          className={classes.image}
-          src={designCtx.interiorDesign.img.imgUrl}
-          ref={imgRef}
-          onClick={addItemHandler}
-        />
-        {showItemsComp}
-        {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
-          <div
-            style={{
-              position: "absolute",
-              left: `${coordinates.coorX}px`,
-              top: `${coordinates.coorY}px`,
-              background: "#8e8e8e66",
-              color: "white",
-              borderRadius: "4px",
-            }}
-          >
-            <h4 className={classes["stuff-title"]}>
-              {itemInfo.name || "Item name"}
-            </h4>
-            <p className={classes["stuff-price"]}>{`price: ${
-              itemInfo.price || "-"
-            }$`}</p>
-            <p className={classes["stuff-desc"]}>shopping mall</p>
-          </div>
-        ) : null}
+    <div className={classes.register}>
+      <div
+        className={
+          coordinates.width > 700 ? classes.coldisplay : classes.rowdisplay
+        }
+      >
+        <div className={classes.showimage}>
+          {caption && (
+            <div className={classes.caption}>
+              <p>click the location in image to display an item description.</p>
+            </div>
+          )}
+          <img
+            className={classes.image}
+            src={designCtx.interiorDesign.img.imgUrl}
+            ref={imgRef}
+            onClick={addItemHandler}
+          />
+          {showItemsComp}
+          {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
+            <div
+              style={{
+                position: "absolute",
+                left: `${coordinates.coorX}px`,
+                top: `${coordinates.coorY}px`,
+                background: "#8e8e8e66",
+                color: "white",
+                borderRadius: "4px",
+              }}
+            >
+              <h4 className={classes["stuff-title"]}>
+                {itemInfo.name || "Item name"}
+              </h4>
+              <p className={classes["stuff-price"]}>{`price: ${
+                itemInfo.price || "-"
+              }$`}</p>
+              <p className={classes["stuff-desc"]}>shopping mall</p>
+            </div>
+          ) : null}
+        </div>
+        <div className={classes["item-form"]}>
+          {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
+            <form ref={itemFormRef}>
+              <label>Item Name</label>
+              <input
+                type="text"
+                autoFocus={true}
+                onChange={(event) =>
+                  setItemInfo({ ...itemInfo, name: event.currentTarget.value })
+                }
+              />
+              <label>Item Price</label>
+              <input
+                type="text"
+                onChange={(event) =>
+                  setItemInfo({
+                    ...itemInfo,
+                    price: parseInt(event.currentTarget.value),
+                  })
+                }
+              />
+              <label>Item Description</label>
+              <textarea ref={descRef} />
+              <label>Item Shopping Address</label>
+              <input type="text" ref={addressRef} />
+              <button onClick={newItemHandler}>Save current Item</button>
+              <button>cancel addig current Item</button>
+            </form>
+          ) : (
+            <div>
+              <p>If you want to add a new item. Click the image again!</p>
+              <button onClick={saveDesignHandler}>Save this Design</button>
+            </div>
+          )}
+        </div>
       </div>
-      <div className={classes["item-form"]}>
-        {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
-          <form ref={itemFormRef}>
-            <label>Item Name</label>
-            <input
-              type="text"
-              autoFocus={true}
-              onChange={(event) =>
-                setItemInfo({ ...itemInfo, name: event.currentTarget.value })
-              }
-            />
-            <label>Item Price</label>
-            <input
-              type="text"
-              onChange={(event) =>
-                setItemInfo({
-                  ...itemInfo,
-                  price: parseInt(event.currentTarget.value),
-                })
-              }
-            />
-            <label>Item Description</label>
-            <textarea ref={descRef} />
-            <label>Item Shopping Address</label>
-            <input type="text" ref={addressRef} />
-            <button onClick={newItemHandler}>Save current Item</button>
-            <button>cancel addig current Item</button>
-          </form>
-        ) : (
-          <div>
-            <p>If you want to add a new item. Click the image again!</p>
-            <button onClick={saveDesignHandler}>Save this Design</button>
-          </div>
-        )}
-      </div>
-    </>
+    </div>
   );
 };
 

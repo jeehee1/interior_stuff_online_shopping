@@ -1,12 +1,29 @@
 .register {
   display: flex;
-  margin: 0 auto;
+  flex-wrap: wrap;
   position: relative;
   text-align: center;
   justify-content: center;
+  align-items: center;
   gap: 1rem;
   font: inherit;
 }
+
+.coldisplay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rowdisplay {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.showimg {
+  display: inline;
+}
+
 
 .caption {
   position: absolute;
@@ -28,12 +45,15 @@
 }
 
 .item-form {
-  margin: 1rem 0;
+  display: inline-block;
+  width: 15rem;
+  margin: 1rem auto;
 }
 
-.item-form form {
+.item-form{
+  width: 20rem;
   text-align: center;
-  margin: auto;
+  margin: 0 1rem;
 }
 
 .stuff-title {

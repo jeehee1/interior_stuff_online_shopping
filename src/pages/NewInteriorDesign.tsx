@@ -19,7 +19,7 @@ const NewInteriorDesign = () => {
       break;
     case 2:
       stageComponent = (
-        <p>Save Successfully! {designCtx.interiorDesign.img.imgName}</p>
+        <p>Save Successfully! {`${designCtx.interiorDesign.img.imgName}`}</p>
       );
       break;
     default:

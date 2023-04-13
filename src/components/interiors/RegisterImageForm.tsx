@@ -44,7 +44,6 @@ const RegisterImageForm = (props: { onNextStage: () => void }) => {
     designCtx.addImage(new DesignImg(type, name, desc, url));
     props.onNextStage();
   };
-  console.log(designCtx.interiorDesign);
 
   return (
     <>
