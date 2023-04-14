@@ -9,7 +9,8 @@ This is a web application that displays interior design images along with the it
 * Display item locations on the image when hovering over an image.
 
 ### Running the Project Locally
-```node.js
+```
+node.js
 npm install
 npm start
 ```
