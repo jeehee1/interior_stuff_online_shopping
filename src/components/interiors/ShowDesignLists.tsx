@@ -33,9 +33,11 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
 
   return (
     <div className={classes["interior-list"]}>
+      <div className={classes.new}>
       <Link to="/interiors/new" className={classes.btn}>
         Register new Interior Design
       </Link>
+      </div>
       <div className={classes.deploy}>
       <ul>{lists}</ul>
       </div>

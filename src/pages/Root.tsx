@@ -6,9 +6,7 @@ const RootLayout = () => {
   return (
     <>
       <MainNavigation />
-      <h1>DESIGN your House</h1>
       <main>
-        <SideNavigation/>
         <Outlet />
       </main>
     </>

@@ -4,11 +4,14 @@ import { NavLink } from "react-router-dom";
 const MainNavigation = () => {
   return (
     <header className={classes.header}>
+      <h1>MAKE YOUR INTERIOR DESIGN</h1>
+
       <nav>
         <ul className={classes.nav}>
           <li>
             <NavLink
               to="/"
+              end
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
@@ -19,6 +22,7 @@ const MainNavigation = () => {
           <li>
             <NavLink
               to="/interiors"
+              end
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
@@ -29,6 +33,7 @@ const MainNavigation = () => {
           <li>
             <NavLink
               to="/interiors/new"
+              end
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
@@ -37,14 +42,15 @@ const MainNavigation = () => {
             </NavLink>
           </li>
           <li>
-            <NavLink
-              to="/interiors/details"
+            {/* <NavLink
+              to="/"
+              end
               className={({ isActive }) =>
                 isActive ? classes.active : undefined
               }
             >
-              DETAIL
-            </NavLink>
+              SIGN IN
+            </NavLink> */}
           </li>
         </ul>
       </nav>

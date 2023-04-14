@@ -23,6 +23,13 @@
   transition: 0.3s;
 }
 
+
+.new {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 3rem;
+}
+
 .interior-list img {
   margin: 0.3rem auto;
   height: 14rem;
