@@ -3,7 +3,10 @@ import { DesignContext } from "../../store/design-context";
 import classes from "./RegisterItemsForm.module.css";
 import { useContext, useEffect, useRef, useState } from "react";
 
-const RegisterItemsForm = (props: { onNextStage: () => void }) => {
+const RegisterItemsForm = (props: {
+  onNextStage: () => void;
+  onPrevStage: () => void;
+}) => {
   const designCtx = useContext(DesignContext);
   const img = designCtx.interiorDesign.img;
 
@@ -15,7 +18,6 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     name: "",
     price: 0,
   });
- 
 
   const [coordinates, setCoordinates] = useState<{
     coorX: number;
@@ -112,7 +114,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
     );
     const data = await response.json();
     //it returns data.name as an id
-    console.log(data.name)
+    console.log(data.name);
 
     props.onNextStage();
   };
@@ -131,7 +133,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
         }
       >
         <div className={classes.showimg}>
-          {caption && (
+          {caption && coordinates.width > 0 && (
             <div className={classes.caption}>
               <p>click the location in image to display an item description.</p>
             </div>
@@ -139,6 +141,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
           <img
             className={classes.image}
             src={designCtx.interiorDesign.img.imgUrl}
+            alt="Cannot find an image. Please check image URLs again."
             ref={imgRef}
             onClick={addItemHandler}
           />
@@ -194,8 +197,17 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
             </form>
           ) : (
             <div>
-              <p>If you want to add a new item. Click the image again!</p>
-              <button onClick={saveDesignHandler}>Save this Design</button>
+              {coordinates.width > 0 && (
+                <p>If you want to add a new item. Click the image again!</p>
+              )}
+              {coordinates.width > 0 && (
+                <button onClick={saveDesignHandler}>Save this Design</button>
+              )}
+              {coordinates.width === 0 && (
+                <button onClick={() => props.onPrevStage()}>
+                  Go Back to register image
+                </button>
+              )}
             </div>
           )}
         </div>

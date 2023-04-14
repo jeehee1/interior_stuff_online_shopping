@@ -15,7 +15,14 @@ const NewInteriorDesign = () => {
       stageComponent = <RegisterImageForm onNextStage={() => setStage(1)} />;
       break;
     case 1:
-      stageComponent = <RegisterItemsForm onNextStage={() => setStage(2)} />;
+      stageComponent = (
+        <RegisterItemsForm
+          onNextStage={() => setStage(2)}
+          onPrevStage={() => {
+            setStage(0);
+          }}
+        />
+      );
       break;
     case 2:
       stageComponent = (
