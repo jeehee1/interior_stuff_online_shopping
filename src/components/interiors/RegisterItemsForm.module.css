@@ -1,11 +1,6 @@
 .register {
-  display: flex;
-  flex-wrap: wrap;
+  display: block;
   position: relative;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
   font: inherit;
 }
 
@@ -18,13 +13,12 @@
 .rowdisplay {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
 
 .showimg {
+  margin-right: 1rem;
   display: inline;
 }
-
 
 .caption {
   position: absolute;
@@ -34,28 +28,24 @@
   color: white;
   margin: 0 auto;
 }
-
-.image {
-  max-width: 1200px;
-}
-
 .caption p {
+  width: auto;
   font: inhterit;
   font-size: 1.2rem;
   font-weight: 600;
 }
 
-.item-form {
-  display: inline-block;
-  width: 15rem;
-  margin: 1rem auto;
+
+.image {
+  max-width: 1200px;
 }
 
-.item-form{
+.item-form {
+  display: flex;
+  align-items: center;
   width: 20rem;
-  text-align: center;
-  margin: 0 1rem;
 }
+
 
 .stuff-title {
   margin: 1rem 1rem 0 1rem;

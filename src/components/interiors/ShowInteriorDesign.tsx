@@ -3,8 +3,6 @@ import { useState } from "react";
 import classes from "./ShowInteriorDesign.module.css";
 import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
 
-
-
 const ShowInteriorDesign = (props: {
   info: {
     type: string;

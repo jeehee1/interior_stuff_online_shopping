@@ -111,6 +111,8 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
       }
     );
     const data = await response.json();
+    //it returns data.name as an id
+    console.log(data.name)
 
     props.onNextStage();
   };
@@ -128,7 +130,7 @@ const RegisterItemsForm = (props: { onNextStage: () => void }) => {
           coordinates.width > 700 ? classes.coldisplay : classes.rowdisplay
         }
       >
-        <div className={classes.showimage}>
+        <div className={classes.showimg}>
           {caption && (
             <div className={classes.caption}>
               <p>click the location in image to display an item description.</p>

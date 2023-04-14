@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import ShowDesignLists from "../components/interiors/ShowDesignLists";
 
 const DUMMY_DATA = [
@@ -84,17 +85,42 @@ const DUMMY_DATA = [
   },
 ];
 
-type designsObject = {
-    id: number;
-    imgUrl: string;
-    imgDesc: string;
-    imgName: string;
-  }[];
+type DesignsObject = {
+  id: number;
+  imgUrl: string;
+  imgDesc: string;
+  imgName: string;
+}[];
 
 const InteriorDesignLists = () => {
-  const formattedDesigns: designsObject = [];
+  const [designList, setDesignList] = useState<DesignsObject>([]);
+
+  const getDesignList = async () => {
+    const response = await fetch(
+      "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json?limittToLast=10"
+    );
+    const data = await response.json();
+    let retrievedDesign = [];
+    for (const key in data) {
+      retrievedDesign.push({
+        id: data[key].img.imgId,
+        imgUrl: data[key].img.imgUrl,
+        imgDesc: data[key].img.imgDesc,
+        imgName: data[key].img.imgName,
+      });
+      setDesignList(retrievedDesign);
+    }
+  };
   
-  DUMMY_DATA.map((data) =>
+  useEffect(() => {
+    getDesignList();
+  }, []);
+
+  console.log(designList);
+
+  const formattedDesigns: DesignsObject = [];
+
+  designList.map((data) =>
     formattedDesigns.push({
       id: data.id,
       imgUrl: data.imgUrl,

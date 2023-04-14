@@ -36,7 +36,9 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
       <Link to="/interiors/new" className={classes.btn}>
         Register new Interior Design
       </Link>
+      <div className={classes.deploy}>
       <ul>{lists}</ul>
+      </div>
     </div>
   );
 };
