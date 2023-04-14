@@ -86,7 +86,8 @@ const DUMMY_DATA = [
 ];
 
 type DesignsObject = {
-  id: number;
+  id: string;
+  imgId: number;
   imgUrl: string;
   imgDesc: string;
   imgName: string;
@@ -103,7 +104,8 @@ const InteriorDesignLists = () => {
     let retrievedDesign = [];
     for (const key in data) {
       retrievedDesign.push({
-        id: data[key].img.imgId,
+        id: key,
+        imgId: data[key].img.imgId,
         imgUrl: data[key].img.imgUrl,
         imgDesc: data[key].img.imgDesc,
         imgName: data[key].img.imgName,
@@ -111,7 +113,7 @@ const InteriorDesignLists = () => {
       setDesignList(retrievedDesign);
     }
   };
-  
+
   useEffect(() => {
     getDesignList();
   }, []);
@@ -123,6 +125,7 @@ const InteriorDesignLists = () => {
   designList.map((data) =>
     formattedDesigns.push({
       id: data.id,
+      imgId: data.imgId,
       imgUrl: data.imgUrl,
       imgDesc: data.imgDesc,
       imgName: data.imgName,

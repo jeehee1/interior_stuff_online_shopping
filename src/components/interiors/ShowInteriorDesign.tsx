@@ -5,41 +5,35 @@ import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
 
 const ShowInteriorDesign = (props: {
   info: {
-    type: string;
-    id: number;
+    id: string;
+    imgId: number;
     imgType: string;
     imgName: string;
     imgDesc: string;
     imgUrl: string;
     items: {
-      name: string;
-      price: number;
-      desciption: string;
-      shopAddress: string;
-      coorX: number;
-      coorY: number;
+      itemId: number;
+      itemName: string;
+      itemPrice: number;
+      itemDesc: string;
+      itemAddress: string;
+      itemCoorX: number;
+      itemCoorY: number;
     }[];
   };
 }) => {
   const [showInfo, setShowInfo] = useState(false);
 
-
   const imgRef = useRef<HTMLImageElement>(null);
-
-  // useEffect(() => {}, [imgRef]);
-  // console.log(offset);
 
   const showStuffInfoHandler = () => {
     setShowInfo(true);
-
   };
 
   const hideStuffInfoHandler = () => {
     setShowInfo(false);
     console.log("hide info");
   };
-
-  
 
   const interiorDesignInfo = props.info;
   console.log(interiorDesignInfo);
@@ -52,17 +46,17 @@ const ShowInteriorDesign = (props: {
         onMouseOut={hideStuffInfoHandler}
         style={{
           position: "absolute",
-          left: `${item.coorX}px`,
-          top: `${item.coorY}px`,
+          left: `${item.itemCoorX}px`,
+          top: `${item.itemCoorY}px`,
           background: "#8e8e8e66",
           color: "white",
           borderRadius: "4px",
           justifyContent: "center",
         }}
       >
-        <h3 className={classes["stuff-title"]}>{item.name}</h3>
-        <p className={classes["stuff-price"]}>{item.price}$</p>
-        <a href={item.shopAddress}>go for shopping</a>
+        <h3 className={classes["stuff-title"]}>{item.itemName}</h3>
+        <p className={classes["stuff-price"]}>{item.itemPrice}$</p>
+        <a href={item.itemAddress}>go for shopping</a>
       </div>
     )
   );

@@ -3,7 +3,8 @@ import classes from "./ShowDesignLists.module.css";
 
 type designsObjects = {
   designs: {
-    id: number;
+    id: string;
+    imgId: number
     imgUrl: string;
     imgDesc: string;
     imgName: string;
@@ -16,7 +17,8 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
   const lists: any = [];
   designs.map(
     (data: {
-      id: number;
+      id: string;
+      imgId: number;
       imgUrl: string;
       imgName: string;
       imgDesc: string;

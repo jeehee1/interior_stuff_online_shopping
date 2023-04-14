@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import InteriorDesignLists from "./pages/InteriorDesignLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
-import InteriorDesignDetailPage from "./pages/InteriorDesignDetail";
+import InteriorDesignDetail from "./pages/InteriorDesignDetail";
 import NewInteriorDesign from "./pages/NewInteriorDesign";
 
 const router = createBrowserRouter([
@@ -15,7 +15,7 @@ const router = createBrowserRouter([
       { index: true, element: <InteriorDesignLists /> },
       { path: "/interiors", element: <InteriorDesignLists /> },
       { path: "/interiors/new", element: <NewInteriorDesign /> },
-      { path: "/interiors/:interiorsId", element: <InteriorDesignDetailPage /> },
+      { path: "/interiors/:designId", element: <InteriorDesignDetail /> },
     ],
   },
 ]);
