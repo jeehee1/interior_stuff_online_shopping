@@ -11,4 +11,5 @@ This is a web application that displays interior design images along with the it
 ### Running the Project Locally
 ```node.js
 npm install
-npm start```
+npm start
+```
