@@ -200,14 +200,12 @@ const RegisterItemsForm = (props: {
               {coordinates.width > 0 && (
                 <p>If you want to add a new item. Click the image again!</p>
               )}
-              {coordinates.width > 0 && (
-                <button onClick={saveDesignHandler}>Save this Design</button>
-              )}
               {coordinates.width === 0 && (
                 <button onClick={() => props.onPrevStage()}>
                   Go Back to register image
                 </button>
               )}
+              <button onClick={saveDesignHandler}>Save this Design</button>
             </div>
           )}
         </div>
