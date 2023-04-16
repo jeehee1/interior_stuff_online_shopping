@@ -200,7 +200,7 @@ const RegisterItemsForm = (props: {
               {coordinates.width > 0 && (
                 <p>If you want to add a new item. Click the image again!</p>
               )}
-              {coordinates.width === 0 && (
+              {coordinates.width === 0 || coordinates.coorX ===0 && (
                 <button onClick={() => props.onPrevStage()}>
                   Go Back to register image
                 </button>

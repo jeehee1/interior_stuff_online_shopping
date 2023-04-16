@@ -59,17 +59,25 @@ const RegisterImageForm = (props: { onNextStage: () => void }) => {
         </div>
         <div className={classes.img}>
           <label htmlFor="img-url">Interior Design Image Url</label>
-          <input id="img-url" type="text" ref={imgUrlRef} />
+          <input id="img-url" type="text" ref={imgUrlRef} defaultValue={
+              designCtx.interiorDesign ? designCtx.interiorDesign.img.imgUrl : ""
+            }/>
         </div>
         <div className={classes.name}>
           <label htmlFor="img-name">Interior Design Name</label>
-          <input id="img-name" type="text" ref={imgNameRef} />
+          <input id="img-name" type="text" ref={imgNameRef} defaultValue={
+              designCtx.interiorDesign ? designCtx.interiorDesign.img.imgName : ""
+            }/>
         </div>
         <div className={classes.desc}>
           <label htmlFor="img-desc">Interior Design Description</label>
-          <textarea id="img-desc" ref={imgDescRef} />
+          <textarea id="img-desc" ref={imgDescRef} defaultValue={
+              designCtx.interiorDesign ? designCtx.interiorDesign.img.imgDesc : ""
+            }/>
         </div>
-      <button className={classes.btn} onClick={addNewDesignInfo}>Next</button>
+        <button className={classes.btn} onClick={addNewDesignInfo}>
+          Next
+        </button>
       </form>
     </>
   );
