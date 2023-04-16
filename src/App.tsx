@@ -1,5 +1,7 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import InteriorDesignLists from "./pages/InteriorDesignLists";
+import InteriorDesignLists, {
+  loader as listLoader,
+} from "./pages/InteriorDesignLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
 import InteriorDesignDetail from "./pages/InteriorDesignDetail";
@@ -13,15 +15,15 @@ const router = createBrowserRouter([
     id: "root",
     children: [
       { index: true, element: <InteriorDesignLists /> },
-      { path: "/interiors", element: <InteriorDesignLists /> },
-      { path: "/interiors/new", element: <NewInteriorDesign /> },
-      { path: "/interiors/:designId", element: <InteriorDesignDetail /> },
+      { path: "interiors", element: <InteriorDesignLists />, loader: listLoader },
+      { path: "interiors/new", element: <NewInteriorDesign /> },
+      { path: "interiors/:designId", element: <InteriorDesignDetail /> },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router}/>;
+  return <RouterProvider router={router} />;
 }
 
 export default App;
