@@ -4,7 +4,9 @@ import InteriorDesignLists, {
 } from "./pages/InteriorDesignLists";
 import RootLayout from "./pages/Root";
 import ErrorPage from "./pages/Error";
-import InteriorDesignDetail from "./pages/InteriorDesignDetail";
+import InteriorDesignDetail, {
+  loader as detailLoader,
+} from "./pages/InteriorDesignDetail";
 import NewInteriorDesign from "./pages/NewInteriorDesign";
 
 const router = createBrowserRouter([
@@ -15,9 +17,17 @@ const router = createBrowserRouter([
     id: "root",
     children: [
       { index: true, element: <InteriorDesignLists /> },
-      { path: "interiors", element: <InteriorDesignLists />, loader: listLoader },
+      {
+        path: "interiors",
+        element: <InteriorDesignLists />,
+        loader: listLoader,
+      },
       { path: "interiors/new", element: <NewInteriorDesign /> },
-      { path: "interiors/:designId", element: <InteriorDesignDetail /> },
+      {
+        path: "interiors/:designId",
+        element: <InteriorDesignDetail />,
+        loader: detailLoader,
+      },
     ],
   },
 ]);

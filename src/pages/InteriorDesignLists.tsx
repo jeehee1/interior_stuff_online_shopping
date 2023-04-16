@@ -11,7 +11,7 @@ type DesignsObject = {
 
 const InteriorDesignLists = () => {
   const designsData: any = useLoaderData();
-  let designList:DesignsObject = [];
+  let designList: DesignsObject = [];
   for (const key in designsData) {
     designList.push({
       id: key,
@@ -27,13 +27,15 @@ const InteriorDesignLists = () => {
 
 export const loader = async () => {
   const response = await fetch(
-    "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json?limittToLast=10"
+    "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json"
   );
   if (!response.ok) {
-    throw new Error("Cannot fetch the data");
+    throw new Response(
+      JSON.stringify({ message: "Could not fetch designs." }),
+      { status: 500 }
+    );
   } else {
-    const data = await response.json();
-    return data;
+    return response;
   }
 };
 

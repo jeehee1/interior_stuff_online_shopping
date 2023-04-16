@@ -1,6 +1,5 @@
-import { useParams } from "react-router-dom";
+import { useLoaderData, useParams } from "react-router-dom";
 import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
-import { useEffect, useState } from "react";
 
 type DesignItemInfo = {
   id: string;
@@ -21,40 +20,34 @@ type DesignItemInfo = {
 };
 
 const InteriorDesignDetail = () => {
-  const { designId } = useParams<{ designId: string }>();
-  const id: string = designId ? designId : "notfound";
-  if (id === "notfound") {
-    throw new Error("interiors not fhound");
-  }
+  const designDetial: any = useLoaderData();
+  const { interiorsId } = useParams();
 
-  const [designDetail, setDesignDetail] = useState<DesignItemInfo>();
-
-  const getDesignDetail = async () => {
-    const response = await fetch(
-      `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}.json`
-    );
-    const data = await response.json();
-    console.log(data);
-    setDesignDetail({
-      id: id,
-      imgId: data.img.imgId,
-      imgType: data.img.imgType,
-      imgName: data.img.imgName,
-      imgDesc: data.img.imgDesc,
-      imgUrl: data.img.imgUrl,
-      items: data.items,
-    });
+  const designDetail: DesignItemInfo = {
+    id: interiorsId!,
+    imgId: designDetial.img.imgId,
+    imgType: designDetial.img.imgType,
+    imgName: designDetial.img.imgName,
+    imgDesc: designDetial.img.imgDesc,
+    imgUrl: designDetial.img.imgUrl,
+    items: designDetial.items,
   };
 
-  useEffect(() => {
-    getDesignDetail();
-  }, []);
+  return <>{designDetail && <ShowInteriorDesign info={designDetail} />}</>;
+};
 
-  return (
-    <>
-      {designDetail && <ShowInteriorDesign info={designDetail} />}
-    </>
+export const loader = async () => {
+  const response = await fetch(
+    `https://interior-design-392ca-default-rtdb.firebaseio.com/design.json`
   );
+  if (!response.ok) {
+    throw new Response(
+      JSON.stringify({ message: "Could not fetch designs." }),
+      { status: 500 }
+    );
+  } else {
+    return response;
+  }
 };
 
 export default InteriorDesignDetail;
