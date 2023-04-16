@@ -1,4 +1,4 @@
-import { useLoaderData, useParams } from "react-router-dom";
+import { useLoaderData, useParams, json } from "react-router-dom";
 import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
 
 type DesignItemInfo = {
@@ -21,10 +21,10 @@ type DesignItemInfo = {
 
 const InteriorDesignDetail = () => {
   const designDetial: any = useLoaderData();
-  const { interiorsId } = useParams();
+  const { designId } = useParams();
 
   const designDetail: DesignItemInfo = {
-    id: interiorsId!,
+    id: designId!,
     imgId: designDetial.img.imgId,
     imgType: designDetial.img.imgType,
     imgName: designDetial.img.imgName,
@@ -36,15 +36,13 @@ const InteriorDesignDetail = () => {
   return <>{designDetail && <ShowInteriorDesign info={designDetail} />}</>;
 };
 
-export const loader = async () => {
+export const loader = async ({ params }: { params: any }) => {
+  const id = params.designId!;
   const response = await fetch(
-    `https://interior-design-392ca-default-rtdb.firebaseio.com/design.json`
+    `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}.json`
   );
   if (!response.ok) {
-    throw new Response(
-      JSON.stringify({ message: "Could not fetch designs." }),
-      { status: 500 }
-    );
+    throw json({ message: "Could not fetch design details." }, { status: 500 });
   } else {
     return response;
   }

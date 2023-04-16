@@ -1,5 +1,5 @@
 import ShowDesignLists from "../components/interiors/ShowDesignLists";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, json } from "react-router-dom";
 
 type DesignsObject = {
   id: string;
@@ -30,8 +30,8 @@ export const loader = async () => {
     "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json"
   );
   if (!response.ok) {
-    throw new Response(
-      JSON.stringify({ message: "Could not fetch designs." }),
+    throw json(
+     { message: "Could not fetch designs." },
       { status: 500 }
     );
   } else {
