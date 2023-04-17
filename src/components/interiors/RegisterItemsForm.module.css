@@ -1,5 +1,11 @@
+.add-item {
+  display: flex;
+  margin: 2rem auto;
+}
+
 .register {
   display: block;
+  margin: 3rem auto;
   position: relative;
   font: inherit;
 }

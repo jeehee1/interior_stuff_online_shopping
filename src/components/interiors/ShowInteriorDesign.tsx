@@ -80,7 +80,7 @@ const ShowInteriorDesign = ({
   };
 
   return (
-    <>
+    <div className={classes.show}>
       <div key={design.id}>
         <h4>{design.imgName}</h4>
         <p>{design.imgDesc}</p>
@@ -103,7 +103,7 @@ const ShowInteriorDesign = ({
         </div>
       </div>
       <ShowInteriorDesignDetail items={items} />
-    </>
+    </div>
   );
 };
 

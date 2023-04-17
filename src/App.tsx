@@ -12,6 +12,7 @@ import NewInteriorItem from "./pages/NewInteriorItem";
 import { action as registerAction } from "./components/interiors/RegisterDesignForm";
 import { action as addItemAction } from "./components/interiors/RegisterItemsForm";
 import { action as deleteDesignAction } from "./components/interiors/ShowInteriorDesign";
+import HomePage from "./pages/Home";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     id: "root",
     children: [
-      { index: true, element: <InteriorDesignLists /> },
+      { index: true, element: <HomePage /> },
       {
         path: "interiors",
         element: <InteriorDesignLists />,

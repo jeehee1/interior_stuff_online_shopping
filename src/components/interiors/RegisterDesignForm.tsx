@@ -9,7 +9,7 @@ const RegisterDesignForm = () => {
   };
 
   return (
-    <>
+    <div className={classes.form}>
       <Form method="POST">
         <div>
           <label htmlFor="type">Room Type</label>
@@ -39,7 +39,7 @@ const RegisterDesignForm = () => {
         </button>
         <button className={classes.btn}>Save</button>
       </Form>
-    </>
+    </div>
   );
 };
 

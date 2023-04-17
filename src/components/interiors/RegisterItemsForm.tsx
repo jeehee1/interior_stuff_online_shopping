@@ -7,7 +7,6 @@ const RegisterItemsForm = ({
 }: {
   imgData: { url: string; id: string };
 }) => {
-
   const imgRef = useRef<HTMLImageElement>(null);
 
   const [coordinates, setCoordinates] = useState<{
@@ -35,7 +34,7 @@ const RegisterItemsForm = ({
   const [display, setDisplay] = useState({ name: "", price: "" });
 
   return (
-    <>
+    <div className={classes["add-item"]}>
       <div>
         <p>Click the iamge and add item information where you want!</p>
         <div className={classes.register}>
@@ -111,7 +110,7 @@ const RegisterItemsForm = ({
           </Form>
         )}
       </div>
-    </>
+    </div>
   );
 };
 
