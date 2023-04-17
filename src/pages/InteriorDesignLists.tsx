@@ -3,7 +3,7 @@ import { useLoaderData, json } from "react-router-dom";
 
 type DesignsObject = {
   id: string;
-  imgId: number;
+  imgType: string;
   imgUrl: string;
   imgDesc: string;
   imgName: string;
@@ -15,10 +15,10 @@ const InteriorDesignLists = () => {
   for (const key in designsData) {
     designList.push({
       id: key,
-      imgId: designsData[key].img.imgId,
-      imgUrl: designsData[key].img.imgUrl,
-      imgDesc: designsData[key].img.imgDesc,
-      imgName: designsData[key].img.imgName,
+      imgType: designsData[key].imgType,
+      imgUrl: designsData[key].imgUrl,
+      imgDesc: designsData[key].imgDesc,
+      imgName: designsData[key].imgName,
     });
   }
 
@@ -30,10 +30,7 @@ export const loader = async () => {
     "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json"
   );
   if (!response.ok) {
-    throw json(
-     { message: "Could not fetch designs." },
-      { status: 500 }
-    );
+    throw json({ message: "Could not fetch designs." }, { status: 500 });
   } else {
     return response;
   }

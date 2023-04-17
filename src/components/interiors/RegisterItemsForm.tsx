@@ -1,23 +1,14 @@
-import Item from "../../models/items";
-import { DesignContext } from "../../store/design-context";
+import { Form, json, redirect, useParams } from "react-router-dom";
 import classes from "./RegisterItemsForm.module.css";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
-const RegisterItemsForm = (props: {
-  onNextStage: () => void;
-  onPrevStage: () => void;
+const RegisterItemsForm = ({
+  imgData,
+}: {
+  imgData: { url: string; id: string };
 }) => {
-  const designCtx = useContext(DesignContext);
-  const img = designCtx.interiorDesign.img;
 
   const imgRef = useRef<HTMLImageElement>(null);
-
-  const [caption, setCaption] = useState(true);
-
-  const [itemInfo, setItemInfo] = useState<{ name: string; price: number }>({
-    name: "",
-    price: 0,
-  });
 
   const [coordinates, setCoordinates] = useState<{
     coorX: number;
@@ -28,10 +19,6 @@ const RegisterItemsForm = (props: {
   const addItemHandler = (event: React.MouseEvent) => {
     event.preventDefault();
     const curImgOffset = imgRef.current!.getBoundingClientRect();
-    // setTimeout(() => {
-    //   window.scrollTo(0, curImgOffset.height);
-    // }, 500);
-    setCaption(false);
     const x = event.pageX - window.pageXOffset - curImgOffset.left;
     const y = event.pageY - window.pageYOffset - curImgOffset.top;
 
@@ -41,177 +28,122 @@ const RegisterItemsForm = (props: {
       width: curImgOffset.width,
     });
   };
+  console.log(coordinates.coorX, coordinates.coorY);
 
-  const descRef = useRef<HTMLTextAreaElement>(null);
-  const addressRef = useRef<HTMLInputElement>(null);
   const itemFormRef = useRef<HTMLFormElement>(null);
 
-  const newItemHandler = (event: React.MouseEvent) => {
-    event.preventDefault();
-    const newItem = {
-      name: itemInfo.name,
-      price: itemInfo.price,
-      desc: descRef.current?.value || "",
-      address: addressRef.current?.value || "",
-      coorX: coordinates!.coorX,
-      coorY: coordinates!.coorY,
-    };
-
-    designCtx.addItems([
-      ...designCtx.interiorDesign.items,
-      new Item(
-        newItem.name,
-        newItem.price,
-        newItem.desc,
-        newItem.address,
-        newItem.coorX,
-        newItem.coorY
-      ),
-    ]);
-    itemFormRef.current?.reset();
-    setItemInfo({ name: "", price: 0 });
-    setCoordinates({ ...coordinates, coorX: 0, coorY: 0 });
-  };
-  const [showItemsComp, setShowItesmsComp] = useState();
-  console.log(coordinates.width);
-
-  useEffect(() => {
-    let showItems: any = [];
-    designCtx.interiorDesign.items.map((item) => {
-      showItems.push(
-        <div
-          key={item.itemId}
-          style={{
-            position: "absolute",
-            left: `${item.itemCoorX}px`,
-            top: `${item.itemCoorY}px`,
-            background: "#8e8e8e66",
-            color: "white",
-            borderRadius: "4px",
-          }}
-        >
-          <h4 className={classes["stuff-title"]}>{item.itemName}</h4>
-          <p
-            className={classes["stuff-price"]}
-          >{`price: ${item.itemPrice}$`}</p>
-          <p className={classes["stuff-desc"]}>shopping mall</p>
-        </div>
-      );
-    });
-    setShowItesmsComp(showItems);
-  }, [designCtx.interiorDesign]);
-
-  const saveDesignHandler = async () => {
-    console.log(designCtx.interiorDesign);
-    const newDesign = designCtx.interiorDesign;
-    const response = await fetch(
-      "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json",
-      {
-        method: "POST",
-        body: JSON.stringify(newDesign),
-        headers: { "Content-Type": "application/json" },
-      }
-    );
-    const data = await response.json();
-    //it returns data.name as an id
-    console.log(data.name);
-
-    props.onNextStage();
-  };
-
-  const cancelItemHandler = () => {
-    itemFormRef.current?.reset();
-    setItemInfo({ name: "", price: 0 });
-    setCoordinates({ ...coordinates, coorX: 0, coorY: 0 });
-  };
+  const [display, setDisplay] = useState({ name: "", price: "" });
 
   return (
-    <div className={classes.register}>
-      <div
-        className={
-          coordinates.width > 700 ? classes.coldisplay : classes.rowdisplay
-        }
-      >
-        <div className={classes.showimg}>
-          {caption && coordinates.width > 0 && (
-            <div className={classes.caption}>
-              <p>click the location in image to display an item description.</p>
-            </div>
-          )}
+    <>
+      <div>
+        <p>Click the iamge and add item information where you want!</p>
+        <div className={classes.register}>
           <img
             className={classes.image}
-            src={designCtx.interiorDesign.img.imgUrl}
+            src={imgData.url}
             alt="Cannot find an image. Please check image URLs again."
             ref={imgRef}
             onClick={addItemHandler}
           />
-          {showItemsComp}
-          {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
+          {coordinates.width > 0 && (
             <div
               style={{
                 position: "absolute",
                 left: `${coordinates.coorX}px`,
                 top: `${coordinates.coorY}px`,
+                padding: `0.2rem 0.5rem`,
                 background: "#8e8e8e66",
                 color: "white",
                 borderRadius: "4px",
               }}
             >
-              <h4 className={classes["stuff-title"]}>
-                {itemInfo.name || "Item name"}
-              </h4>
-              <p className={classes["stuff-price"]}>{`price: ${
-                itemInfo.price || "-"
-              }$`}</p>
-              <p className={classes["stuff-desc"]}>shopping mall</p>
-            </div>
-          ) : null}
-        </div>
-        <div className={classes["item-form"]}>
-          {coordinates!.coorX > 0 || coordinates!.coorY > 0 ? (
-            <form ref={itemFormRef}>
-              <label>Item Name</label>
-              <input
-                type="text"
-                autoFocus={true}
-                onChange={(event) =>
-                  setItemInfo({ ...itemInfo, name: event.currentTarget.value })
-                }
-              />
-              <label>Item Price</label>
-              <input
-                type="text"
-                onChange={(event) =>
-                  setItemInfo({
-                    ...itemInfo,
-                    price: parseInt(event.currentTarget.value),
-                  })
-                }
-              />
-              <label>Item Description</label>
-              <textarea ref={descRef} />
-              <label>Item Shopping Address</label>
-              <input type="text" ref={addressRef} />
-              <button onClick={cancelItemHandler}>Cancel</button>
-              <button onClick={newItemHandler}>Save current Item</button>
-            </form>
-          ) : (
-            <div>
-              {coordinates.width > 0 && (
-                <p>If you want to add a new item. Click the image again!</p>
-              )}
-              {coordinates.width === 0 || coordinates.coorX ===0 && (
-                <button onClick={() => props.onPrevStage()}>
-                  Go Back to register image
-                </button>
-              )}
-              <button onClick={saveDesignHandler}>Save this Design</button>
+              <h4 className={classes["stuff-title"]}>Item : {display.name}</h4>
+              <p className={classes["stuff-price"]}>price: {display.price}$</p>
             </div>
           )}
         </div>
       </div>
-    </div>
+      <div className={classes["item-form"]}>
+        {coordinates.width > 0 && (
+          <Form method="POST">
+            <label htmlFor="name">Item Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              autoFocus={true}
+              onChange={(event) =>
+                setDisplay({ ...display, name: event.currentTarget.value })
+              }
+            />
+            <label htmlFor="price">Item Price</label>
+            <input
+              type="text"
+              id="price"
+              name="price"
+              required
+              onChange={(event) =>
+                setDisplay({ ...display, price: event.currentTarget.value })
+              }
+            />
+            <label htmlFor="desc">Item Description</label>
+            <textarea id="desc" name="desc" required />
+            <label htmlFor="addr">Item Shopping Address</label>
+            <input type="text" id="addr" name="addr" />
+            <input
+              type="text"
+              id="coor-x"
+              name="coor-x"
+              value={coordinates.coorX}
+              hidden
+              readOnly
+            />
+            <input
+              type="text"
+              id="coor-y"
+              name="coor-y"
+              value={coordinates.coorY}
+              hidden
+              readOnly
+            />
+            <button>Save current Item</button>
+          </Form>
+        )}
+      </div>
+    </>
   );
 };
 
 export default RegisterItemsForm;
+
+export const action = async ({
+  request,
+  params,
+}: {
+  request: any;
+  params: any;
+}) => {
+  const id = params.designId;
+  const data = await request.formData();
+  const newItem = {
+    itemName: data.get("name"),
+    itemDesc: data.get("desc"),
+    itemPrice: parseInt(data.get("price")),
+    itemAddr: data.get("addr"),
+    itemCoorX: parseInt(data.get("coor-x")),
+    itemCoorY: parseInt(data.get("coor-y")),
+  };
+  const response = await fetch(
+    `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}/items.json`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(newItem),
+    }
+  );
+  if (!response.ok) {
+    throw json({ message: "Cannot save the item." }, { status: 500 });
+  }
+  return redirect(`/interiors/${id}`);
+};

@@ -1,11 +1,15 @@
-.stuff-title {
-    margin: 0;
+.interior-info {
+    font: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0 3rem;
 }
 
-.stuff-price {
-    margin: 0;
+.item-title, .item-price, .item-desc {
+    margin: 0.3rem 0;
 }
 
-.stuff-desc {
-    margin: 0;
+.item-addr {
+    color: grey
 }

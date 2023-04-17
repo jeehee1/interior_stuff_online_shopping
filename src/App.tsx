@@ -8,6 +8,10 @@ import InteriorDesignDetail, {
   loader as detailLoader,
 } from "./pages/InteriorDesignDetail";
 import NewInteriorDesign from "./pages/NewInteriorDesign";
+import NewInteriorItem from "./pages/NewInteriorItem";
+import { action as registerAction } from "./components/interiors/RegisterDesignForm";
+import { action as addItemAction } from "./components/interiors/RegisterItemsForm";
+import { action as deleteDesignAction } from "./components/interiors/ShowInteriorDesign";
 
 const router = createBrowserRouter([
   {
@@ -22,11 +26,27 @@ const router = createBrowserRouter([
         element: <InteriorDesignLists />,
         loader: listLoader,
       },
-      { path: "interiors/new", element: <NewInteriorDesign /> },
+      {
+        path: "interiors/new",
+        element: <NewInteriorDesign />,
+        action: registerAction,
+      },
       {
         path: "interiors/:designId",
-        element: <InteriorDesignDetail />,
+        id: "design-detail",
         loader: detailLoader,
+        children: [
+          {
+            index: true,
+            element: <InteriorDesignDetail />,
+            action: deleteDesignAction,
+          },
+          {
+            path: "new",
+            element: <NewInteriorItem />,
+            action: addItemAction,
+          },
+        ],
       },
     ],
   },

@@ -4,7 +4,7 @@ import classes from "./ShowDesignLists.module.css";
 type designsObjects = {
   designs: {
     id: string;
-    imgId: number
+    imgType: string;
     imgUrl: string;
     imgDesc: string;
     imgName: string;
@@ -16,13 +16,7 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
 
   const lists: any = [];
   designs.map(
-    (data: {
-      id: string;
-      imgId: number;
-      imgUrl: string;
-      imgName: string;
-      imgDesc: string;
-    }) => {
+    (data) => {
       lists.push(
         <li key={data.id} onClick={() => navigate(`/interiors/${data.id}`)}>
           <img src={data.imgUrl} />
@@ -36,12 +30,12 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
   return (
     <div className={classes["interior-list"]}>
       <div className={classes.new}>
-      <Link to="/interiors/new" className={classes.btn}>
-        Register new Interior Design
-      </Link>
+        <Link to="/interiors/new" className={classes.btn}>
+          Register new Interior Design
+        </Link>
       </div>
       <div className={classes.deploy}>
-      <ul>{lists}</ul>
+        <ul>{lists}</ul>
       </div>
     </div>
   );

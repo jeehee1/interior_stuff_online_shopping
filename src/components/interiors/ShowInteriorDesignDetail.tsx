@@ -1,45 +1,35 @@
-import classes from "./ShowInteriorDesign.module.css";
+import classes from "./ShowInteriorDesignDetail.module.css";
 
 import Card from "../layout/Card";
 
-const ShowInteriorDesignDetail = (props: {
+const ShowInteriorDesignDetail = ({
+  items,
+}: {
   items: {
-    itemId: number;
+    itemId: string;
     itemName: string;
     itemPrice: number;
     itemDesc: string;
-    itemAddress: string;
+    itemAddr: string;
     itemCoorX: number;
     itemCoorY: number;
   }[];
-  imgInfo: {
-    name: string;
-    desc: string;
-  };
 }) => {
-  const items = props.items;
-
   const itemLists: any = [];
   items.map((item) => {
     itemLists.push(
       <Card>
-        <h3 className={classes["stuff-title"]}>{item.itemName}</h3>
-        <p className={classes["stuff-price"]}>{item.itemPrice}$</p>
-        <p className={classes["stuff-desc"]}>{item.itemDesc}</p>
-        <a href={item.itemAddress}>go for shopping</a>
+        <h3 className={classes["item-title"]}>{item.itemName}</h3>
+        <p className={classes["item-price"]}>{item.itemPrice}$</p>
+        <p className={classes["item-desc"]}>{item.itemDesc}</p>
+        <a href={item.itemAddr} className={classes["item-addr"]}>
+          Go to buy the item
+        </a>
       </Card>
     );
   });
 
-  return (
-    <div className={classes["interior-info"]}>
-      <div>
-        <h4>{props.imgInfo.name}</h4>
-        <p>{props.imgInfo.desc}</p>
-      </div>
-      {itemLists}
-    </div>
-  );
+  return <div className={classes["interior-info"]}>{itemLists}</div>;
 };
 
 export default ShowInteriorDesignDetail;

@@ -1,29 +1,23 @@
-.img-frame {
+.info {
     display: flex;
+    flex-direction: column;
     margin: 0 auto;
-    position: relative;
     text-align: center;
-    justify-content: center;
-    gap: 1rem;
 }
 
-.img {
-    padding: 0;
+.img-frame {
+    position:relative;
+}
+
+.item-title, .item-price  {
     margin: 0;
 }
 
-.stuff-title {
+.item-addr {
     margin: 0;
-}
+    color: #f6d4d4;
 
-.stuff-price {
-    margin: 0;
 }
-
-.stuff-desc {
-    margin: 0;
-}
-
 @media(max-width: 60rem) {
     .img-frame {
         display: flex;

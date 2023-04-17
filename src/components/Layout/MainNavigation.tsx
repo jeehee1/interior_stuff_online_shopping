@@ -5,7 +5,6 @@ const MainNavigation = () => {
   return (
     <header className={classes.header}>
       <h1>MAKE YOUR INTERIOR DESIGN</h1>
-
       <nav>
         <ul className={classes.nav}>
           <li>
@@ -40,17 +39,6 @@ const MainNavigation = () => {
             >
               REGISTER NEW INTERORS
             </NavLink>
-          </li>
-          <li>
-            {/* <NavLink
-              to="/"
-              end
-              className={({ isActive }) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              SIGN IN
-            </NavLink> */}
           </li>
         </ul>
       </nav>

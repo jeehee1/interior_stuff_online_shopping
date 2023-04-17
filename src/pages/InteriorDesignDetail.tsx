@@ -1,43 +1,66 @@
-import { useLoaderData, useParams, json } from "react-router-dom";
+import {
+  useParams,
+  json,
+  useRouteLoaderData,
+} from "react-router-dom";
 import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
 
-type DesignItemInfo = {
+type Design = {
   id: string;
-  imgId: number;
   imgType: string;
   imgName: string;
   imgDesc: string;
   imgUrl: string;
-  items: {
-    itemId: number;
-    itemName: string;
-    itemPrice: number;
-    itemDesc: string;
-    itemAddress: string;
-    itemCoorX: number;
-    itemCoorY: number;
-  }[];
 };
 
-const InteriorDesignDetail = () => {
-  const designDetial: any = useLoaderData();
-  const { designId } = useParams();
+type DesignItem = {
+  itemId: string;
+  itemName: string;
+  itemPrice: number;
+  itemDesc: string;
+  itemAddr: string;
+  itemCoorX: number;
+  itemCoorY: number;
+}[];
 
-  const designDetail: DesignItemInfo = {
+const InteriorDesignDetail = () => {
+  const { designId } = useParams();
+  const design: any = useRouteLoaderData("design-detail");
+  console.log(design);
+
+  const designDetail: Design = {
     id: designId!,
-    imgId: designDetial.img.imgId,
-    imgType: designDetial.img.imgType,
-    imgName: designDetial.img.imgName,
-    imgDesc: designDetial.img.imgDesc,
-    imgUrl: designDetial.img.imgUrl,
-    items: designDetial.items,
+    imgType: design.imgType,
+    imgName: design.imgName,
+    imgDesc: design.imgDesc,
+    imgUrl: design.imgUrl,
   };
 
-  return <>{designDetail && <ShowInteriorDesign info={designDetail} />}</>;
+  const designItem: DesignItem = [];
+  for (const key in design.items) {
+    designItem.push({
+      itemId: key,
+      itemName: design.items[key].itemName,
+      itemPrice: design.items[key].itemPrice,
+      itemDesc: design.items[key].itemDesc,
+      itemAddr: design.items[key].itemAddr,
+      itemCoorX: design.items[key].itemCoorX,
+      itemCoorY: design.items[key].itemCoorY,
+    });
+  }
+
+  return (
+    <>
+      {designDetail && (
+        <ShowInteriorDesign design={designDetail} items={designItem} />
+      )}
+    </>
+  );
 };
 
 export const loader = async ({ params }: { params: any }) => {
   const id = params.designId!;
+  console.log(id);
   const response = await fetch(
     `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}.json`
   );
