@@ -1,29 +1,69 @@
 .header {
-    background-color: #eed9d96e;
-    padding: 1rem 3rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
+  background-color: #eed9d96e;
+  padding: 1rem 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+
+.icon {
+  display: none;
 }
 
 .nav {
-    width: 100%;
-    margin: 0 auto;
-    list-style: none;
-    display: flex;
-    gap: 2rem;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav ul {
+  display: flex;
+  gap: 2rem;
+  width: 100%;
+  padding: 0;
+  list-style: none;
 }
 
 .nav a {
-    color: #939393;
-    
-    font-weight: bold;
-    text-decoration: none;
+  color: #939393;
+  font-weight: bold;
+  text-decoration: none;
 }
 
 .nav .active,
 .nav a:hover {
-    color: #796c6c;
-    text-decoration: underline;
+  color: #796c6c;
+  text-decoration: underline;
+}
+
+@media (max-width: 1000px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 500px) {
+  .icon {
+    display: contents;
+    cursor: pointer;
+  }
+
+  .nav {
+      transition: all 0.3s ease-out;
+      height: 0px;
+      overflow: hidden;
+  }
+
+  .nav ul {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .nav.show {
+    display: block;
+    height: 150px;
+  }
 }

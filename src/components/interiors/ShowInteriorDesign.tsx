@@ -43,7 +43,6 @@ const ShowInteriorDesign = ({
 
   const hideStuffInfoHandler = () => {
     setShowInfo(false);
-    console.log("hide info");
   };
 
   const displayInfo: any = [];
