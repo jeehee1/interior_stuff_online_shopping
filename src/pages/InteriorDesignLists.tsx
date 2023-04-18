@@ -1,5 +1,5 @@
 import ShowDesignLists from "../components/interiors/ShowDesignLists";
-import { useLoaderData, json } from "react-router-dom";
+import { useLoaderData, json, useNavigation } from "react-router-dom";
 
 type DesignsObject = {
   id: string;
@@ -11,6 +11,7 @@ type DesignsObject = {
 
 const InteriorDesignLists = () => {
   const designsData: any = useLoaderData();
+  const navigation = useNavigation();
   let designList: DesignsObject = [];
   for (const key in designsData) {
     designList.push({
@@ -22,7 +23,11 @@ const InteriorDesignLists = () => {
     });
   }
 
-  return <ShowDesignLists designs={designList} />;
+  return navigation.state === "submitting" ? (
+    <p>Loading...</p>
+  ) : (
+    <ShowDesignLists designs={designList} />
+  );
 };
 
 export const loader = async () => {

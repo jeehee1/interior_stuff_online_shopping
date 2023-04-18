@@ -75,10 +75,6 @@ const ShowInteriorDesign = ({
 
   const navigate = useNavigate();
 
-  const forwardAddItemHandler = () => {
-    return navigate("new");
-  };
-
   return (
     <div className={classes.show}>
       <div key={design.id}>
@@ -95,11 +91,14 @@ const ShowInteriorDesign = ({
           {showInfo && displayInfo}
         </div>
         <div>
-          <Form method="DELETE" className={classes["btn-form"]}>
-            <button onClick={() => {}}>Edit Design</button>
-            <button>Remove Design</button>
-            <button onClick={forwardAddItemHandler}>Add Item</button>
-          </Form>
+          <button
+            onClick={() => {
+              navigate("edit");
+            }}
+          >
+            Edit Design
+          </button>
+          <button onClick={() => navigate("new")}>Add Item</button>
         </div>
       </div>
       <ShowInteriorDesignDetail items={items} />
@@ -108,16 +107,3 @@ const ShowInteriorDesign = ({
 };
 
 export default ShowInteriorDesign;
-
-export const action = async ({ params }: { params: any }) => {
-  const id = params.designId;
-  const response = await fetch(
-    `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}.json`,
-    { method: "DELETE" }
-  );
-  if (!response.ok) {
-    throw json({ message: "Cannot delete design." }, { status: 500 });
-  } else {
-    return redirect("/interiors");
-  }
-};

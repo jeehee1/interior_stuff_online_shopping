@@ -23,7 +23,7 @@ const ShowInteriorDesignDetail = ({
         <p className={classes["item-price"]}>{item.itemPrice}$</p>
         <p className={classes["item-desc"]}>{item.itemDesc}</p>
         <a href={item.itemAddr} className={classes["item-addr"]}>
-          Go to buy the item
+          Go to buy
         </a>
       </Card>
     );
