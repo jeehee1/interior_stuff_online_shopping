@@ -67,7 +67,7 @@ const ShowInteriorDesign = ({
         <h3 className={classes["item-title"]}>{item.itemName}</h3>
         <p className={classes["item-price"]}>{item.itemPrice}$</p>
         <a href={item.itemAddr} className={classes["item-addr"]}>
-          shopping page
+          go to buy
         </a>
       </div>
     )

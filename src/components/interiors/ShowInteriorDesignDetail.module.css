@@ -1,4 +1,5 @@
 .interior-info {
+    max-width: 20rem;
     font: inherit;
     display: flex;
     flex-direction: column;

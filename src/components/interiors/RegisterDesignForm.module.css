@@ -4,6 +4,7 @@
 
 select{
   font: inherit;
+  width: 100%;
   padding: 0.3rem 0.7rem;
 }
 
@@ -36,9 +37,18 @@ textarea {
   border-radius: 4px;
   color: #fffdfd;
 }
+.delete-btn {
+  background-color: #b83737;
+  border: 1px solid #b83737;
+  padding: 0.5rem 1rem;
+}
 
 .btn:hover {
   cursor: pointer;
   background-color: #6c8b5c;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.25);
+}
+
+.delete-btn:hover {
+  background-color: #bb2222;
 }

@@ -38,7 +38,6 @@ const RegisterDesignForm = ({
             required
             defaultValue={design ? design.imgType : "livingroom"}
           >
-            <option value="">--Please choose an option--</option>
             <option value="livingroom">Livingroom</option>
             <option value="kitchen">Kitchen</option>
             <option value="library">Library</option>
@@ -51,7 +50,7 @@ const RegisterDesignForm = ({
           {design ? (
             <p>
               If you want to change Image, Please delete this design and
-              register again.
+              register it again.
             </p>
           ) : (
             <input id="url" name="url" type="text" required />
@@ -78,10 +77,7 @@ const RegisterDesignForm = ({
         </div>
         <div>
           {!isSubmitting && (
-            <button
-              className={classes.btn}
-              onClick={cancelRegisterHandler}
-            >
+            <button className={classes.btn} onClick={cancelRegisterHandler}>
               Cancel
             </button>
           )}
@@ -90,11 +86,9 @@ const RegisterDesignForm = ({
           </button>
         </div>
       </Form>
-      {!isSubmitting && (
+      {!isSubmitting && design !== null && (
         <Form method="delete">
-          <button className={classes["delete-btn"]}>
-            Delete this design
-          </button>
+          <button className={classes["delete-btn"]}>Delete this design</button>
         </Form>
       )}
     </div>
