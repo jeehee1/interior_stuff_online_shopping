@@ -4,6 +4,7 @@ import Card from "../layout/Card";
 
 const ShowInteriorDesignDetail = ({
   items,
+  showEditBtn,
 }: {
   items: {
     itemId: string;
@@ -14,6 +15,7 @@ const ShowInteriorDesignDetail = ({
     itemCoorX: number;
     itemCoorY: number;
   }[];
+  showEditBtn: boolean;
 }) => {
   const itemLists: any = [];
   items.map((item) => {
@@ -25,6 +27,12 @@ const ShowInteriorDesignDetail = ({
         <a href={item.itemAddr} className={classes["item-addr"]}>
           Go to buy
         </a>
+        {showEditBtn && (
+          <div>
+            <button>edit</button>
+            <button>delete</button>
+          </div>
+        )}
       </Card>
     );
   });

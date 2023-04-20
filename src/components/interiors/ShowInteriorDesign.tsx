@@ -2,15 +2,7 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInteriorDesign.module.css";
 import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
-import Card from "../layout/Card";
-import {
-  Form,
-  json,
-  redirect,
-  useNavigate,
-  useParams,
-  useRouteLoaderData,
-} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const ShowInteriorDesign = ({
   design,
@@ -34,6 +26,7 @@ const ShowInteriorDesign = ({
   }[];
 }) => {
   const [showInfo, setShowInfo] = useState(false);
+  const [editBtn, setEditBtn] = useState(false);
 
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -90,17 +83,25 @@ const ShowInteriorDesign = ({
           {showInfo && displayInfo}
         </div>
         <div>
-          <button
-            onClick={() => {
-              navigate("edit");
-            }}
-          >
-            Edit Design
-          </button>
-          <button onClick={() => navigate("new")}>Add Item</button>
+          {!editBtn && (
+            <button onClick={() => setEditBtn(!editBtn)}>Edit</button>
+          )}
+          {editBtn && (
+            <>
+              <button onClick={() => setEditBtn(!editBtn)}>Edit Cancel</button>
+              <button
+                onClick={() => {
+                  navigate("edit");
+                }}
+              >
+                Edit Design
+              </button>
+              <button onClick={() => navigate("new")}>Add Item</button>
+            </>
+          )}
         </div>
       </div>
-      <ShowInteriorDesignDetail items={items} />
+      <ShowInteriorDesignDetail items={items} showEditBtn={editBtn} />
     </div>
   );
 };
