@@ -144,6 +144,9 @@ const RegisterItemForm = ({
             <button>Save current Item</button>
           </Form>
         )}
+        {item&&<Form method="DELETE">
+          <button>delete</button>
+        </Form>}
       </div>
     </div>
   );
@@ -161,7 +164,14 @@ export const action = async ({
   const { designId, itemId } = params;
   const { method } = request;
   const data = await request.formData();
-  const newItem = {
+  let newItem: {
+    itemName: string;
+    itemDesc: string;
+    itemPrice: number;
+    itemAddr: string;
+    itemCoorX: number;
+    itemCoorY: number;
+  } | null = {
     itemName: data.get("name"),
     itemDesc: data.get("desc"),
     itemPrice: parseInt(data.get("price")),
@@ -172,6 +182,10 @@ export const action = async ({
   let url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items.json`;
   if (method === "PATCH") {
     url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items/${itemId}.json`;
+  }
+  if (method === "DELETE") {
+    url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items/${itemId}.json`;
+    newItem = null;
   }
 
   const response = await fetch(url, {

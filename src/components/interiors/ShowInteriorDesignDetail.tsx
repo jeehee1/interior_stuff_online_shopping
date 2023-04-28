@@ -42,7 +42,6 @@ const ShowInteriorDesignDetail = ({
             <button onClick={() => navigate(`${item.itemId}/edit`)}>
               edit
             </button>
-            <button>delete</button>
           </div>
         )}
       </Card>
