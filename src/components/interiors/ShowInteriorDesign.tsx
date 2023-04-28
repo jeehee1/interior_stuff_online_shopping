@@ -101,7 +101,7 @@ const ShowInteriorDesign = ({
           )}
         </div>
       </div>
-      <ShowInteriorDesignDetail items={items} showEditBtn={editBtn} />
+      <ShowInteriorDesignDetail design={design} items={items} showEditBtn={editBtn} />
     </div>
   );
 };

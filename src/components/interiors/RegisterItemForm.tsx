@@ -1,19 +1,36 @@
 import { Form, json, redirect, useParams } from "react-router-dom";
-import classes from "./RegisterItemsForm.module.css";
+import classes from "./RegisterItemForm.module.css";
 import { useRef, useState } from "react";
 
-const RegisterItemsForm = ({
+const RegisterItemForm = ({
+  method,
   imgData,
+  item,
 }: {
+  method: any;
   imgData: { url: string; id: string };
+  item: {
+    itemId: string;
+    itemName: string;
+    itemPrice: number;
+    itemDesc: string;
+    itemAddr: string;
+    itemCoorX: number;
+    itemCoorY: number;
+  } | null;
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
+  console.log(item);
 
   const [coordinates, setCoordinates] = useState<{
     coorX: number;
     coorY: number;
     width: number;
-  }>({ coorX: 0, coorY: 0, width: 0 });
+  }>({
+    coorX: item ? item.itemCoorX : 0,
+    coorY: item ? item.itemCoorY : 0,
+    width: 0,
+  });
 
   const addItemHandler = (event: React.MouseEvent) => {
     event.preventDefault();
@@ -31,7 +48,10 @@ const RegisterItemsForm = ({
 
   const itemFormRef = useRef<HTMLFormElement>(null);
 
-  const [display, setDisplay] = useState({ name: "", price: "" });
+  const [display, setDisplay] = useState({
+    name: item ? item.itemName : "",
+    price: item ? item.itemPrice : 0,
+  });
 
   return (
     <div className={classes["add-item"]}>
@@ -45,7 +65,7 @@ const RegisterItemsForm = ({
             ref={imgRef}
             onClick={addItemHandler}
           />
-          {coordinates.width > 0 && (
+          {coordinates.coorX > 0 && coordinates.coorY > 0 && (
             <div
               style={{
                 position: "absolute",
@@ -64,13 +84,14 @@ const RegisterItemsForm = ({
         </div>
       </div>
       <div className={classes["item-form"]}>
-        {coordinates.width > 0 && (
-          <Form method="POST">
+        {(coordinates.width > 0 || item !== null) && (
+          <Form method={method}>
             <label htmlFor="name">Item Name</label>
             <input
               type="text"
               id="name"
               name="name"
+              defaultValue={item ? item.itemName : ""}
               autoFocus={true}
               onChange={(event) =>
                 setDisplay({ ...display, name: event.currentTarget.value })
@@ -81,15 +102,29 @@ const RegisterItemsForm = ({
               type="text"
               id="price"
               name="price"
+              defaultValue={item ? item.itemPrice : ""}
               required
               onChange={(event) =>
-                setDisplay({ ...display, price: event.currentTarget.value })
+                setDisplay({
+                  ...display,
+                  price: parseInt(event.currentTarget.value),
+                })
               }
             />
             <label htmlFor="desc">Item Description</label>
-            <textarea id="desc" name="desc" required />
+            <textarea
+              id="desc"
+              name="desc"
+              defaultValue={item ? item.itemDesc : ""}
+              required
+            />
             <label htmlFor="addr">Item Shopping Address</label>
-            <input type="text" id="addr" name="addr" />
+            <input
+              type="text"
+              id="addr"
+              name="addr"
+              defaultValue={item ? item.itemAddr : ""}
+            />
             <input
               type="text"
               id="coor-x"
@@ -114,7 +149,7 @@ const RegisterItemsForm = ({
   );
 };
 
-export default RegisterItemsForm;
+export default RegisterItemForm;
 
 export const action = async ({
   request,
@@ -123,7 +158,8 @@ export const action = async ({
   request: any;
   params: any;
 }) => {
-  const id = params.designId;
+  const { designId, itemId } = params;
+  const { method } = request;
   const data = await request.formData();
   const newItem = {
     itemName: data.get("name"),
@@ -133,16 +169,18 @@ export const action = async ({
     itemCoorX: parseInt(data.get("coor-x")),
     itemCoorY: parseInt(data.get("coor-y")),
   };
-  const response = await fetch(
-    `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}/items.json`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newItem),
-    }
-  );
+  let url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items.json`;
+  if (method === "PATCH") {
+    url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items/${itemId}.json`;
+  }
+
+  const response = await fetch(url, {
+    method: method,
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(newItem),
+  });
   if (!response.ok) {
     throw json({ message: "Cannot save the item." }, { status: 500 });
   }
-  return redirect(`/interiors/${id}`);
+  return redirect(`/interiors/${designId}`);
 };

@@ -10,9 +10,10 @@ import InteriorDesignDetail, {
 import NewInteriorDesign from "./pages/NewInteriorDesign";
 import NewInteriorItem from "./pages/NewInteriorItem";
 import { action as manipulateDesignAction } from "./components/interiors/RegisterDesignForm";
-import { action as addItemAction } from "./components/interiors/RegisterItemsForm";
+import { action as manipulateItemAction } from "./components/interiors/RegisterItemForm";
 import HomePage from "./pages/Home";
 import EditInteriorDesign from "./pages/EditInteriorDesign";
+import EditDesignItem from "./pages/EditDesignItem";
 
 const router = createBrowserRouter([
   {
@@ -44,12 +45,17 @@ const router = createBrowserRouter([
           {
             path: "new",
             element: <NewInteriorItem />,
-            action: addItemAction,
+            action: manipulateItemAction,
           },
           {
             path: "edit",
             element: <EditInteriorDesign />,
             action: manipulateDesignAction,
+          },
+          {
+            path: ":itemId/edit",
+            element: <EditDesignItem />,
+            action: manipulateItemAction,
           },
         ],
       },

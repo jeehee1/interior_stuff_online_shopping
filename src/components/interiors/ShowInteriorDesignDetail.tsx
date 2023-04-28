@@ -1,11 +1,20 @@
 import classes from "./ShowInteriorDesignDetail.module.css";
 
 import Card from "../layout/Card";
+import { Form, useNavigate } from "react-router-dom";
 
 const ShowInteriorDesignDetail = ({
+  design,
   items,
   showEditBtn,
 }: {
+  design: {
+    id: string;
+    imgType: string;
+    imgName: string;
+    imgDesc: string;
+    imgUrl: string;
+  };
   items: {
     itemId: string;
     itemName: string;
@@ -17,6 +26,7 @@ const ShowInteriorDesignDetail = ({
   }[];
   showEditBtn: boolean;
 }) => {
+  const navigate = useNavigate();
   const itemLists: any = [];
   items.map((item) => {
     itemLists.push(
@@ -29,7 +39,9 @@ const ShowInteriorDesignDetail = ({
         </a>
         {showEditBtn && (
           <div>
-            <button>edit</button>
+            <button onClick={() => navigate(`${item.itemId}/edit`)}>
+              edit
+            </button>
             <button>delete</button>
           </div>
         )}
