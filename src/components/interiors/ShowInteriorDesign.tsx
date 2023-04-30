@@ -2,19 +2,14 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInteriorDesign.module.css";
 import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ShowInteriorDesign = ({
-  design,
-  items,
-}: {
-  design: {
-    id: string;
-    imgType: string;
-    imgName: string;
-    imgDesc: string;
-    imgUrl: string;
-  };
+type Design = {
+  id: string;
+  imgType: string;
+  imgName: string;
+  imgDesc: string;
+  imgUrl: string;
   items: {
     itemId: string;
     itemName: string;
@@ -24,9 +19,52 @@ const ShowInteriorDesign = ({
     itemCoorX: number;
     itemCoorY: number;
   }[];
-}) => {
+};
+
+type DesignInfo = {
+  id: string;
+  imgType: string;
+  imgName: string;
+  imgDesc: string;
+  imgUrl: string;
+};
+
+type DesignItem = {
+  itemId: string;
+  itemName: string;
+  itemPrice: number;
+  itemDesc: string;
+  itemAddr: string;
+  itemCoorX: number;
+  itemCoorY: number;
+}[];
+
+const ShowInteriorDesign = ({ design }: { design: Design }) => {
   const [showInfo, setShowInfo] = useState(false);
   const [editBtn, setEditBtn] = useState(false);
+
+  const { designId } = useParams();
+
+  const designDetail: DesignInfo = {
+    id: designId!,
+    imgType: design.imgType,
+    imgName: design.imgName,
+    imgDesc: design.imgDesc,
+    imgUrl: design.imgUrl,
+  };
+
+  const items: DesignItem = [];
+  for (const key in design.items) {
+    items.push({
+      itemId: key,
+      itemName: design.items[key].itemName,
+      itemPrice: design.items[key].itemPrice,
+      itemDesc: design.items[key].itemDesc,
+      itemAddr: design.items[key].itemAddr,
+      itemCoorX: design.items[key].itemCoorX,
+      itemCoorY: design.items[key].itemCoorY,
+    });
+  }
 
   const imgRef = useRef<HTMLImageElement>(null);
 
@@ -101,7 +139,11 @@ const ShowInteriorDesign = ({
           )}
         </div>
       </div>
-      <ShowInteriorDesignDetail design={design} items={items} showEditBtn={editBtn} />
+      <ShowInteriorDesignDetail
+        design={design}
+        items={items}
+        showEditBtn={editBtn}
+      />
     </div>
   );
 };
