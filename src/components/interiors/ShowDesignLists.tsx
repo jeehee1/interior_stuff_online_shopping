@@ -25,7 +25,6 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
     );
   }
 
-
   return (
     <div className={classes["interior-list"]}>
       <div className={classes.new}>
@@ -33,9 +32,7 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
           Register new Interior Design
         </Link>
       </div>
-      <div className={classes.deploy}>
-        <ul>{lists}</ul>
-      </div>
+      <ul>{lists}</ul>
     </div>
   );
 };

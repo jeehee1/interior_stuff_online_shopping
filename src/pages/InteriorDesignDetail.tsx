@@ -12,11 +12,7 @@ const InteriorDesignDetail = () => {
       </Await>
     </Suspense>
   );
-  // <>
-  //   {designDetail && (
-  //     <ShowInteriorDesign design={designDetail} items={designItem} />
-  //   )}
-  // </>
+
 };
 
 const loadDesign = async (id: string) => {
