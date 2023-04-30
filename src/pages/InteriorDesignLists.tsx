@@ -1,5 +1,11 @@
+import { Suspense } from "react";
 import ShowDesignLists from "../components/interiors/ShowDesignLists";
-import { useLoaderData, json, useNavigation } from "react-router-dom";
+import {
+  useLoaderData,
+  json,
+  defer,
+  Await,
+} from "react-router-dom";
 
 type DesignsObject = {
   id: string;
@@ -10,35 +16,33 @@ type DesignsObject = {
 }[];
 
 const InteriorDesignLists = () => {
-  const designsData: any = useLoaderData();
-  const navigation = useNavigation();
-  let designList: DesignsObject = [];
-  for (const key in designsData) {
-    designList.push({
-      id: key,
-      imgType: designsData[key].imgType,
-      imgUrl: designsData[key].imgUrl,
-      imgDesc: designsData[key].imgDesc,
-      imgName: designsData[key].imgName,
-    });
-  }
+  const { designsData }: any = useLoaderData();
 
-  return navigation.state === "submitting" ? (
-    <p>Loading...</p>
-  ) : (
-    <ShowDesignLists designs={designList} />
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <Await resolve={designsData}>
+        {(loadedDesigns) => <ShowDesignLists designs={loadedDesigns} />}
+      </Await>
+    </Suspense>
   );
 };
 
-export const loader = async () => {
+export default InteriorDesignLists;
+
+const loadDesigns = async () => {
   const response = await fetch(
     "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json"
   );
   if (!response.ok) {
     throw json({ message: "Could not fetch designs." }, { status: 500 });
   } else {
-    return response;
+    const data = await response.json();
+    return data;
   }
 };
 
-export default InteriorDesignLists;
+export const loader = () => {
+  return defer({
+    designsData: loadDesigns(),
+  });
+};

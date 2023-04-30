@@ -13,19 +13,18 @@ type designsObjects = {
 
 const ShowDesignLists = ({ designs }: designsObjects) => {
   const navigate = useNavigate();
-
   const lists: any = [];
-  designs.map(
-    (data) => {
-      lists.push(
-        <li key={data.id} onClick={() => navigate(`/interiors/${data.id}`)}>
-          <img src={data.imgUrl} />
-          <h4>{data.imgName}</h4>
-          <p>{data.imgDesc}</p>
-        </li>
-      );
-    }
-  );
+
+  for (const key in designs) {
+    lists.push(
+      <li key={key} onClick={() => navigate(`/interiors/${key}`)}>
+        <img src={designs[key].imgUrl} />
+        <h4>{designs[key].imgName}</h4>
+        <p>{designs[key].imgDesc}</p>
+      </li>
+    );
+  }
+
 
   return (
     <div className={classes["interior-list"]}>
