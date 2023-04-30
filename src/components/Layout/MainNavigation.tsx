@@ -39,7 +39,7 @@ const MainNavigation = () => {
                   isActive ? classes.active : undefined
                 }
               >
-                INTERIOR DESIGN LISTS
+                LISTS
               </NavLink>
             </li>
             <li>
@@ -50,9 +50,17 @@ const MainNavigation = () => {
                   isActive ? classes.active : undefined
                 }
               >
-                REGISTER NEW INTERORS
+                NEW
               </NavLink>
             </li>
+            <div className={classes.auth}>
+              <li>
+                <a>SighIn</a>
+              </li>
+              <li>
+                <a>SighUp</a>
+              </li>
+            </div>
           </ul>
         </div>
       </nav>

@@ -26,6 +26,13 @@
   list-style: none;
 }
 
+.nav .auth {
+  margin: 0 3rem;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
 .nav a {
   color: #939393;
   font-weight: bold;
@@ -64,6 +71,6 @@
 
   .nav.show {
     display: block;
-    height: 150px;
+    height: 200px;
   }
 }
