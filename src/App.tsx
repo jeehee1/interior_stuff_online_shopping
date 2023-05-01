@@ -14,6 +14,7 @@ import { action as manipulateItemAction } from "./components/interiors/RegisterI
 import HomePage from "./pages/Home";
 import EditInteriorDesign from "./pages/EditInteriorDesign";
 import EditDesignItem from "./pages/EditDesignItem";
+import Authentication from "./pages/Authentication";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +59,10 @@ const router = createBrowserRouter([
             action: manipulateItemAction,
           },
         ],
+      },
+      {
+        path: "auth",
+        element: <Authentication />,
       },
     ],
   },

@@ -17,6 +17,11 @@ const ErrorPage = () => {
     message = "Could not find resource or page.";
   }
 
+  if(error.status === 402) {
+    title= "Unautorized";
+    message=  "Authorization is failed."
+  }
+
   return (
     <>
       <MainNavigation />
