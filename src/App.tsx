@@ -15,6 +15,7 @@ import HomePage from "./pages/Home";
 import EditInteriorDesign from "./pages/EditInteriorDesign";
 import EditDesignItem from "./pages/EditDesignItem";
 import Authentication from "./pages/Authentication";
+import { action as authAction } from "./pages/Authentication";
 
 const router = createBrowserRouter([
   {
@@ -63,6 +64,7 @@ const router = createBrowserRouter([
       {
         path: "auth",
         element: <Authentication />,
+        action: authAction,
       },
     ],
   },

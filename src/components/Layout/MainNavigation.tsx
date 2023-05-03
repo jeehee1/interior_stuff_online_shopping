@@ -55,10 +55,18 @@ const MainNavigation = () => {
             </li>
             <div className={classes.auth}>
               <li>
-                <a>SighIn</a>
+                <NavLink
+                  to="/auth?mode=login"
+                  end
+                  className={({ isActive }) =>
+                    isActive ? classes.active : undefined
+                  }
+                >
+                  Authentication
+                </NavLink>
               </li>
               <li>
-                <a>SighUp</a>
+                <a>Logout</a>
               </li>
             </div>
           </ul>

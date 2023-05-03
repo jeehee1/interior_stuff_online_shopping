@@ -4,61 +4,45 @@ import {
   firebaseAuth,
   createUserWithEmailAndPassword,
 } from "../../config/firebase";
-import { useNavigate } from "react-router-dom";
+import {
+  Form,
+  Link,
+  useActionData,
+  useNavigate,
+  useNavigation,
+  useSearchParams,
+} from "react-router-dom";
 
 const AuthForm = () => {
-  const navigate = useNavigate();
-  const [isSignUp, setIsSignUp] = useState(true);
-  const [email, setEmail] = useState("");
-  const [pwd, setPwd] = useState("");
-  const [err, setErr] = useState({ code: "", message: "" });
+  const navigation = useNavigation();
+  const [searchParams] = useSearchParams();
+  const isLogin = searchParams.get("mode") === "login";
+  const error: any = useActionData();
 
-  const changeEmailHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setEmail(event.target.value);
-  };
-
-  const changePwdHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-    event.preventDefault();
-    setPwd(event.target.value);
-  };
-
-  const onSubmitSignUp = (event: React.FormEvent) => {
-    event.preventDefault();
-
-    createUserWithEmailAndPassword(firebaseAuth, email, pwd)
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        return navigate("/interiors");
-        // ...
-      })
-      .catch((error) => {
-        console.log(error.code);
-        console.log(error.message);
-        setErr({ code: error.code, message: error.message });
-      });
-  };
+  let isSubmitting = false;
+  navigation.state === "submitting"
+    ? (isSubmitting = true)
+    : (isSubmitting = false);
 
   return (
-    <form method="POST" className={classes.form} onSubmit={onSubmitSignUp}>
-      {isSignUp ? <h1>Sign Up</h1> : <h1>Log In</h1>}
+    <Form method="POST" className={classes.form}>
+      {isLogin ? <h1>Log In</h1> : <h1>Sign Up</h1>}
       <label id="email">Email</label>
-      <input
-        type="text"
-        name="email"
-        id="email"
-        onChange={changeEmailHandler}
-      />
+      <input type="text" name="email" id="email" />
       <label id="pwd">Password</label>
-      <input type="password" id="pwd" name="pwd" onChange={changePwdHandler} />
-      <p className={classes.message}>{err.code}</p>
+      <input type="password" id="pwd" name="pwd" />
+      {error && <p className={classes.message}>{error.code}</p>}
       <div>
-        {isSignUp && <button onClick={() => setIsSignUp(false)}>Log In</button>}
-        {!isSignUp && <button onClick={() => setIsSignUp(true)}>Sign Up</button>}
-        <button>Send</button>
+        <Link className={classes.mode} to={isLogin ? "/auth?mode=signup" : "/auth?mode=login"}>
+          {isLogin ? "Sign Up" : "Log In"}
+        </Link>
+        {/* {isSignUp && <button onClick={() => setIsSignUp(false)}>Log In</button>} */}
+        {/* {!isSignUp && (
+          <button onClick={() => setIsSignUp(true)}>Sign Up</button>
+        )} */}
+        <button>{isSubmitting ? "Submitting..." : "Send"}</button>
       </div>
-    </form>
+    </Form>
   );
 };
 
