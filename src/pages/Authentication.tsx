@@ -33,7 +33,8 @@ export const action = async ({ request }: { request: Request }) => {
       : (getAuth = signInWithEmailAndPassword);
 
     const response = await getAuth(firebaseAuth, authData.email, authData.pwd);
-    localStorage.setItem("token", response.user.uid);
+    const token = await response.user.getIdToken(true);
+    localStorage.setItem("token", token);
     console.log(response);
 
     const expiration = new Date();
@@ -41,9 +42,8 @@ export const action = async ({ request }: { request: Request }) => {
     localStorage.setItem("expiration", expiration.toISOString());
 
     return redirect("/interiors");
-
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return error;
   }
 };

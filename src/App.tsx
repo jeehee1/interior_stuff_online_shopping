@@ -1,4 +1,8 @@
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  useLoaderData,
+} from "react-router-dom";
 import InteriorDesignLists, {
   loader as listLoader,
 } from "./pages/InteriorDesignLists";
@@ -16,6 +20,7 @@ import EditInteriorDesign from "./pages/EditInteriorDesign";
 import EditDesignItem from "./pages/EditDesignItem";
 import Authentication from "./pages/Authentication";
 import { action as authAction } from "./pages/Authentication";
+import { tokenLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +28,7 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     id: "root",
+    loader: tokenLoader,
     children: [
       { index: true, element: <HomePage /> },
       {
