@@ -1,10 +1,12 @@
 import classes from "./RegisterDesignForm.module.css";
+import { useEffect } from "react";
 import {
   Form,
   useNavigate,
   redirect,
   json,
   useNavigation,
+  useRouteLoaderData,
 } from "react-router-dom";
 
 const RegisterDesignForm = ({
@@ -22,6 +24,13 @@ const RegisterDesignForm = ({
   const navigate = useNavigate();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+
+  const token = useRouteLoaderData("root");
+  useEffect(() => {
+    if (!token) {
+      return navigate("/auth?mode=login");
+    }
+  }, [token]);
 
   const cancelRegisterHandler = () => {
     navigate("..");
