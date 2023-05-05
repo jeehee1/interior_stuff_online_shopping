@@ -9,29 +9,28 @@ export function getTokenDuration() {
 }
 
 export function getAuthToken() {
-  const token = localStorage.getItem("token");
-
-  if(!token) {
-    return;
+  if (!localStorage.getItem("token")) {
+    return null;
   }
+  const token = localStorage.getItem("token");
   const tokenDuration = getTokenDuration();
-  if(tokenDuration< 0) {
+  if (tokenDuration < 0) {
     return "EXPIRED";
   }
   return token;
 }
 
 export function tokenLoader() {
-    return getAuthToken();
+  return getAuthToken();
 }
 
 export function checkAuthLoader() {
-    const token = getAuthToken();
-    if(!token){
-        return redirect('/auth');
-    }
+  const token = getAuthToken();
+  if (!token) {
+    return redirect("/auth");
+  }
 }
 
 // export async function getUserInfo() {
-//     const repsonse 
+//     const repsonse
 // }

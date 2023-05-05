@@ -6,23 +6,23 @@ import { getTokenDuration } from "../util/auth";
 const RootLayout = () => {
   const token = useLoaderData();
   const submit = useSubmit();
-
   useEffect(() => {
+    console.log(token)
     if (!token) {
       return;
     }
     if (token === "EXPIRED") {
-      //Logout submit;
+      submit(null, { action: "/logout", method: "POST" });
     }
 
     const tokenDuration = getTokenDuration();
     console.log(tokenDuration);
 
     setTimeout(() => {
-      //logout submit;
+      submit(null, { action: "/logout", method: "POST" });
     }, tokenDuration);
-  }, [token]);
-  
+  }, [token, submit]);
+
   return (
     <>
       <MainNavigation />

@@ -1,12 +1,20 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classes from "./MainNavigation.module.css";
 import { useState } from "react";
-import { NavLink } from "react-router-dom";
+import {
+  Form,
+  Link,
+  NavLink,
+  useLoaderData,
+  useRouteLoaderData,
+} from "react-router-dom";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 
 const MainNavigation = () => {
   const [showNav, setShowNav] = useState(false);
+  const token = useRouteLoaderData("root");
+  const showLogout: boolean = token ? true : false;
 
   return (
     <header className={classes.header}>
@@ -54,20 +62,26 @@ const MainNavigation = () => {
               </NavLink>
             </li>
             <div className={classes.auth}>
-              <li>
-                <NavLink
-                  to="/auth?mode=login"
-                  end
-                  className={({ isActive }) =>
-                    isActive ? classes.active : undefined
-                  }
-                >
-                  Authentication
-                </NavLink>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
+              {!showLogout && (
+                <li>
+                  <NavLink
+                    to="/auth?mode=login"
+                    end
+                    className={({ isActive }) =>
+                      isActive ? classes.active : undefined
+                    }
+                  >
+                    Authentication
+                  </NavLink>
+                </li>
+              )}
+              {showLogout && (
+                <li>
+                  <Form action="/logout" method="post">
+                    <button className={classes.logout}>Logout</button>
+                  </Form>
+                </li>
+              )}
             </div>
           </ul>
         </div>

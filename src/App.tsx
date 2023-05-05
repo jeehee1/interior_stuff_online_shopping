@@ -21,6 +21,7 @@ import EditDesignItem from "./pages/EditDesignItem";
 import Authentication from "./pages/Authentication";
 import { action as authAction } from "./pages/Authentication";
 import { tokenLoader } from "./util/auth";
+import { action as logoutAction } from "./pages/Logout";
 
 const router = createBrowserRouter([
   {
@@ -72,6 +73,7 @@ const router = createBrowserRouter([
         element: <Authentication />,
         action: authAction,
       },
+      { path: "logout", action: logoutAction },
     ],
   },
 ]);
