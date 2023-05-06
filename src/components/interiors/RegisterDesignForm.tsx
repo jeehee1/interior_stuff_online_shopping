@@ -7,7 +7,9 @@ import {
   json,
   useNavigation,
   useRouteLoaderData,
+  Params,
 } from "react-router-dom";
+import { tokenLoader } from "../../util/auth";
 
 const RegisterDesignForm = ({
   method,
@@ -28,6 +30,7 @@ const RegisterDesignForm = ({
   const token = useRouteLoaderData("root");
   useEffect(() => {
     if (!token) {
+      alert("Please login first.");
       return navigate("/auth?mode=login");
     }
   }, [token]);
@@ -110,17 +113,36 @@ export const action = async ({
   request,
   params,
 }: {
-  request: any;
-  params: any;
+  request: Request;
+  params: Params;
 }) => {
+  const token = tokenLoader();
+  if (token === null || token === "EXPIRED") {
+    alert("Authentication failed. Pelase Login.");
+    return redirect("/auth?mode=login");
+  }
   const id = params.designId;
   const method = request.method;
   const data = await request.formData();
-  let designData: any = {
-    imgName: data.get("name"),
-    imgUrl: data.get("url"),
-    imgDesc: data.get("desc"),
-    imgType: data.get("type"),
+  let designData:
+    | {
+        uid: string;
+        imgName: string;
+        imgUrl: string;
+        imgDesc: string;
+        imgType: string;
+      }
+    | {
+        imgName: string;
+        imgDesc: string;
+        imgType: string;
+      }
+    | null = {
+    uid: token,
+    imgName: `${data.get("name")}`,
+    imgUrl: `${data.get("url")}`,
+    imgDesc: `${data.get("desc")}`,
+    imgType: `${data.get("type")}`,
   };
 
   let url = "https://interior-design-392ca-default-rtdb.firebaseio.com/design";
@@ -129,9 +151,9 @@ export const action = async ({
     url =
       "https://interior-design-392ca-default-rtdb.firebaseio.com/design/" + id;
     designData = {
-      imgName: data.get("name"),
-      imgDesc: data.get("desc"),
-      imgType: data.get("type"),
+      imgName: `${data.get("name")}`,
+      imgDesc: `${data.get("desc")}`,
+      imgType: `${data.get("type")}`,
     };
   }
   if (method === "DELETE") {
