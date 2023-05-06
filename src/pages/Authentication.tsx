@@ -33,7 +33,7 @@ export const action = async ({ request }: { request: Request }) => {
       : (getAuth = signInWithEmailAndPassword);
 
     const response = await getAuth(firebaseAuth, authData.email, authData.pwd);
-    const token = await response.user.getIdToken(true);
+    const token = response.user.uid;
     localStorage.setItem("token", token);
     console.log(response);
 

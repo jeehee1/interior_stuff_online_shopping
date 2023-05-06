@@ -1,4 +1,5 @@
 import { redirect } from "react-router-dom";
+import { firebaseAuth } from "../config/firebase";
 
 export function getTokenDuration() {
   const storedExpirationDate = localStorage.getItem("expiration") || "";
@@ -30,7 +31,3 @@ export function checkAuthLoader() {
     return redirect("/auth");
   }
 }
-
-// export async function getUserInfo() {
-//     const repsonse
-// }
