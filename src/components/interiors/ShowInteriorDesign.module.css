@@ -10,12 +10,19 @@
     text-align: center;
 }
 
+.img-name, .img-desc {
+    max-width: 70rem;
+    width: 90%;
+    margin: 1.3rem auto;
+}
+
 .img-frame {
     position:relative;
 }
 
 .item-title, .item-price  {
     margin: 0;
+    width: 90%;
 }
 
 .item-addr {

@@ -19,6 +19,7 @@ const RegisterItemForm = ({
     itemCoorY: number;
   } | null;
 }) => {
+  console.log(imgData)
   const imgRef = useRef<HTMLImageElement>(null);
   console.log(item);
 

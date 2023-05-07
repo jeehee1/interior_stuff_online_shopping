@@ -3,7 +3,7 @@ import { json, useRouteLoaderData, defer, Await } from "react-router-dom";
 import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
 
 const InteriorDesignDetail = () => {
-  const { design }: any = useRouteLoaderData("design-detail");
+  const { design }:any = useRouteLoaderData("design-detail");
 
   return (
     <Suspense fallback={<p>Loading...</p>}>
@@ -12,7 +12,6 @@ const InteriorDesignDetail = () => {
       </Await>
     </Suspense>
   );
-
 };
 
 const loadDesign = async (id: string) => {
@@ -23,6 +22,7 @@ const loadDesign = async (id: string) => {
     throw json({ message: "Could not fetch design details." }, { status: 500 });
   } else {
     const data = await response.json();
+    console.log(data)
     return data;
   }
 };

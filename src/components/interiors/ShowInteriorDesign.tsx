@@ -107,9 +107,9 @@ const ShowInteriorDesign = ({ design }: { design: Design }) => {
 
   return (
     <div className={classes.show}>
-      <div key={design.id}>
-        <h4>{design.imgName}</h4>
-        <p>{design.imgDesc}</p>
+      <div key={design.id} className={classes.design}>
+        <h4 className={classes['img-name']}>{design.imgName}</h4>
+        <p className={classes['img-desc']}>{design.imgDesc}</p>
         <div className={classes["img-frame"]}>
           <img
             onMouseOver={showStuffInfoHandler}
