@@ -1,11 +1,14 @@
+.item {
+    width: 17rem;
+}
+
 .interior-info {
-    max-width: 20rem;
     font: inherit;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     margin: 0 3rem;
 }
+
 
 .item-title, .item-price, .item-desc {
     margin: 0.3rem 0;

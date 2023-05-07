@@ -107,43 +107,41 @@ const ShowInteriorDesign = ({ design }: { design: Design }) => {
 
   return (
     <div className={classes.show}>
-      <div key={design.id} className={classes.design}>
-        <h4 className={classes['img-name']}>{design.imgName}</h4>
-        <p className={classes['img-desc']}>{design.imgDesc}</p>
-        <div className={classes["img-frame"]}>
-          <img
-            onMouseOver={showStuffInfoHandler}
-            onMouseOut={hideStuffInfoHandler}
-            src={design.imgUrl}
-            alt="cannot load the image."
-            ref={imgRef}
+      <div key={design.id}>
+        <h4 className={classes["img-name"]}>{design.imgName}</h4>
+        <p className={classes["img-desc"]}>{design.imgDesc}</p>
+        <div className={classes.content}>
+          <div className={classes["img-frame"]}>
+            <img
+              onMouseOver={showStuffInfoHandler}
+              onMouseOut={hideStuffInfoHandler}
+              src={design.imgUrl}
+              alt="cannot load the image."
+              ref={imgRef}
+            />
+            {showInfo && displayInfo}
+          </div>
+          <ShowInteriorDesignDetail
+            design={design}
+            items={items}
+            showEditBtn={editBtn}
           />
-          {showInfo && displayInfo}
         </div>
-        <div>
-          {!editBtn && (
-            <button onClick={() => setEditBtn(!editBtn)}>Edit</button>
-          )}
-          {editBtn && (
-            <>
-              <button onClick={() => setEditBtn(!editBtn)}>Edit Cancel</button>
-              <button
-                onClick={() => {
-                  navigate("edit");
-                }}
-              >
-                Edit Design
-              </button>
-              <button onClick={() => navigate("new")}>Add Item</button>
-            </>
-          )}
-        </div>
+        {!editBtn && <button onClick={() => setEditBtn(!editBtn)}>Edit</button>}
+        {editBtn && (
+          <>
+            <button onClick={() => setEditBtn(!editBtn)}>Edit Cancel</button>
+            <button
+              onClick={() => {
+                navigate("edit");
+              }}
+            >
+              Edit Design
+            </button>
+            <button onClick={() => navigate("new")}>Add Item</button>
+          </>
+        )}
       </div>
-      <ShowInteriorDesignDetail
-        design={design}
-        items={items}
-        showEditBtn={editBtn}
-      />
     </div>
   );
 };

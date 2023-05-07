@@ -1,5 +1,6 @@
 .show {
     display: flex;
+    flex-wrap: wrap;
     margin: 2rem 0;
 }
 
@@ -10,19 +11,25 @@
     text-align: center;
 }
 
-.img-name, .img-desc {
-    max-width: 70rem;
-    width: 90%;
-    margin: 1.3rem auto;
+.content {
+    display: flex;
+    flex-direction: row;
 }
 
 .img-frame {
+    width: fit-content;
     position:relative;
+    margin: auto;
+}
+
+.img-desc, .img-name {
+    max-width: 50rem;
+    width: 90%;
+    margin: 1rem auto;
 }
 
 .item-title, .item-price  {
     margin: 0;
-    width: 90%;
 }
 
 .item-addr {
