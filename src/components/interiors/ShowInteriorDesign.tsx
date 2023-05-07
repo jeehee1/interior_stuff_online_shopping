@@ -2,10 +2,11 @@ import React, { useRef } from "react";
 import { useState } from "react";
 import classes from "./ShowInteriorDesign.module.css";
 import ShowInteriorDesignDetail from "./ShowInteriorDesignDetail";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useRouteLoaderData } from "react-router-dom";
 
 type Design = {
   id: string;
+  uid: string;
   imgType: string;
   imgName: string;
   imgDesc: string;
@@ -40,6 +41,7 @@ type DesignItem = {
 }[];
 
 const ShowInteriorDesign = ({ design }: { design: Design }) => {
+  const token = useRouteLoaderData("root");
   const [showInfo, setShowInfo] = useState(false);
   const [editBtn, setEditBtn] = useState(false);
 
@@ -127,8 +129,10 @@ const ShowInteriorDesign = ({ design }: { design: Design }) => {
             showEditBtn={editBtn}
           />
         </div>
-        {!editBtn && <button onClick={() => setEditBtn(!editBtn)}>Edit</button>}
-        {editBtn && (
+        {token === design.uid && !editBtn && (
+          <button onClick={() => setEditBtn(!editBtn)}>Edit</button>
+        )}
+        {token === design.uid && editBtn && (
           <>
             <button onClick={() => setEditBtn(!editBtn)}>Edit Cancel</button>
             <button
