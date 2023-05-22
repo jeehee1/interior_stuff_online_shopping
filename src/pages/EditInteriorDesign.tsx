@@ -1,16 +1,26 @@
-import { useRouteLoaderData } from "react-router-dom";
+import { Suspense } from "react";
+import { Await, useRouteLoaderData } from "react-router-dom";
 import RegisterDesignForm from "../components/interiors/RegisterDesignForm";
 
 const EditInteriorDesign = () => {
-  const data: any = useRouteLoaderData("design-detail");
-  const design = {
-    imgName: data.imgName,
-    imgUrl: data.imgUrl,
-    imgDesc: data.imgDesc,
-    imgType: data.imgType,
-  };
-
-  return <RegisterDesignForm method="patch" design={design} />;
+  const { design }: any = useRouteLoaderData("design-detail");
+  return (
+    <Suspense fallback={<p>Loading...</p>}>
+      <Await resolve={design}>
+        {(loadedDesign) => (
+          <RegisterDesignForm
+            method="patch"
+            design={{
+              imgName: loadedDesign.imgName,
+              imgUrl: loadedDesign.imgUrl,
+              imgDesc: loadedDesign.imgDesc,
+              imgType: loadedDesign.imgType,
+            }}
+          />
+        )}
+      </Await>
+    </Suspense>
+  );
 };
 
 export default EditInteriorDesign;

@@ -26,6 +26,7 @@ const RegisterDesignForm = ({
   const navigate = useNavigate();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
+  console.log(design)
 
   const token = useRouteLoaderData("root");
   useEffect(() => {
@@ -173,5 +174,6 @@ export const action = async ({
   if (!response.ok) {
     throw json({ message: "Could not save design." }, { status: 500 });
   }
+  if(method === 'PATCH') return redirect(`/interiors/${id}`)
   return redirect(`/interiors`);
 };

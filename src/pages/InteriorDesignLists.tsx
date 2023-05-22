@@ -1,11 +1,6 @@
 import { Suspense } from "react";
 import ShowDesignLists from "../components/interiors/ShowDesignLists";
-import {
-  useLoaderData,
-  json,
-  defer,
-  Await,
-} from "react-router-dom";
+import { useLoaderData, json, defer, Await } from "react-router-dom";
 
 type DesignsObject = {
   id: string;

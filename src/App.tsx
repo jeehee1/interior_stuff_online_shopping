@@ -1,7 +1,6 @@
 import {
   RouterProvider,
   createBrowserRouter,
-  useLoaderData,
 } from "react-router-dom";
 import InteriorDesignLists, {
   loader as listLoader,

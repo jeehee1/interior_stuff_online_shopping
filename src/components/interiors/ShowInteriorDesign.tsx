@@ -108,8 +108,7 @@ const ShowInteriorDesign = ({ design }: { design: Design }) => {
   const navigate = useNavigate();
 
   return (
-    <div className={classes.show}>
-      <div key={design.id}>
+      <div key={design.id} className={classes.show}>
         <h4 className={classes["img-name"]}>{design.imgName}</h4>
         <p className={classes["img-desc"]}>{design.imgDesc}</p>
         <div className={classes.content}>
@@ -146,7 +145,6 @@ const ShowInteriorDesign = ({ design }: { design: Design }) => {
           </>
         )}
       </div>
-    </div>
   );
 };
 

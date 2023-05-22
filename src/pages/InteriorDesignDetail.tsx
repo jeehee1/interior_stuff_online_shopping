@@ -22,7 +22,6 @@ const loadDesign = async (id: string) => {
     throw json({ message: "Could not fetch design details." }, { status: 500 });
   } else {
     const data = await response.json();
-    console.log(data)
     return data;
   }
 };

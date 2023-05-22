@@ -9,17 +9,27 @@ const RegisterItemForm = ({
 }: {
   method: any;
   imgData: { url: string; id: string };
-  item: {
-    itemId: string;
-    itemName: string;
-    itemPrice: number;
-    itemDesc: string;
-    itemAddr: string;
-    itemCoorX: number;
-    itemCoorY: number;
-  } | null;
+  item: any
+  // {
+  //   itemId: string;
+  //   itemName: string;
+  //   itemPrice: number;
+  //   itemDesc: string;
+  //   itemAddr: string;
+  //   itemCoorX: number;
+  //   itemCoorY: number;
+  // } | null;
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
+  // {
+  //   itemId: string;
+  //   itemName: string;
+  //   itemPrice: number;
+  //   itemDesc: string;
+  //   itemAddr: string;
+  //   itemCoorX: number;
+  //   itemCoorY: number;
+  // }
   console.log(item);
 
   const [coordinates, setCoordinates] = useState<{
@@ -144,9 +154,11 @@ const RegisterItemForm = ({
             <button>Save current Item</button>
           </Form>
         )}
-        {item&&<Form method="DELETE">
-          <button>delete</button>
-        </Form>}
+        {item && (
+          <Form method="DELETE">
+            <button>delete</button>
+          </Form>
+        )}
       </div>
     </div>
   );
