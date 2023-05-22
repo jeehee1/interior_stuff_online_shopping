@@ -1,11 +1,12 @@
 import { Suspense } from "react";
 import { Await, useRouteLoaderData } from "react-router-dom";
 import RegisterDesignForm from "../components/interiors/RegisterDesignForm";
+import Spinner from "../UI/Spinner";
 
 const EditInteriorDesign = () => {
   const { design }: any = useRouteLoaderData("design-detail");
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Spinner />}>
       <Await resolve={design}>
         {(loadedDesign) => (
           <RegisterDesignForm

@@ -1,20 +1,13 @@
 import { Suspense } from "react";
 import ShowDesignLists from "../components/interiors/ShowDesignLists";
 import { useLoaderData, json, defer, Await } from "react-router-dom";
-
-type DesignsObject = {
-  id: string;
-  imgType: string;
-  imgUrl: string;
-  imgDesc: string;
-  imgName: string;
-}[];
+import Spinner from "../UI/Spinner";
 
 const InteriorDesignLists = () => {
   const { designsData }: any = useLoaderData();
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Spinner />}>
       <Await resolve={designsData}>
         {(loadedDesigns) => <ShowDesignLists designs={loadedDesigns} />}
       </Await>

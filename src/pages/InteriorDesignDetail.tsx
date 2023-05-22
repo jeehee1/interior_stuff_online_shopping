@@ -1,12 +1,13 @@
 import { Suspense } from "react";
 import { json, useRouteLoaderData, defer, Await } from "react-router-dom";
 import ShowInteriorDesign from "../components/interiors/ShowInteriorDesign";
+import Spinner from "../UI/Spinner";
 
 const InteriorDesignDetail = () => {
   const { design }:any = useRouteLoaderData("design-detail");
 
   return (
-    <Suspense fallback={<p>Loading...</p>}>
+    <Suspense fallback={<Spinner/>}>
       <Await resolve={design}>
         {(loadedDesign) => <ShowInteriorDesign design={loadedDesign} />}
       </Await>
