@@ -26,7 +26,6 @@ const RegisterDesignForm = ({
   const navigate = useNavigate();
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
-  console.log(design)
 
   const token = useRouteLoaderData("root");
   useEffect(() => {
@@ -146,11 +145,10 @@ export const action = async ({
     imgType: `${data.get("type")}`,
   };
 
-  let url = "https://interior-design-392ca-default-rtdb.firebaseio.com/design";
+  let url = process.env.REACT_APP_FB_DATABASE_URL+'/design'
 
   if (method === "PATCH") {
-    url =
-      "https://interior-design-392ca-default-rtdb.firebaseio.com/design/" + id;
+    url =process.env.REACT_APP_FB_DATABASE_URL+`/design/${id}`
     designData = {
       imgName: `${data.get("name")}`,
       imgDesc: `${data.get("desc")}`,
@@ -158,8 +156,7 @@ export const action = async ({
     };
   }
   if (method === "DELETE") {
-    url =
-      "https://interior-design-392ca-default-rtdb.firebaseio.com/design/" + id;
+    url =url =process.env.REACT_APP_FB_DATABASE_URL+`/design/${id}`
     designData = null;
   }
   const response = await fetch(url + ".json", {

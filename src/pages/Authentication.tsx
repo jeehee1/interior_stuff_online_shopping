@@ -35,7 +35,6 @@ export const action = async ({ request }: { request: Request }) => {
     const response = await getAuth(firebaseAuth, authData.email, authData.pwd);
     const token = response.user.uid;
     localStorage.setItem("token", token);
-    console.log(response);
 
     const expiration = new Date();
     expiration.setHours(expiration.getHours() + 1);
@@ -43,7 +42,6 @@ export const action = async ({ request }: { request: Request }) => {
 
     return redirect("/interiors");
   } catch (error) {
-    console.log(error);
     return error;
   }
 };

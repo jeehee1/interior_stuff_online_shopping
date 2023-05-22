@@ -7,7 +7,6 @@ const RootLayout = () => {
   const token = useLoaderData();
   const submit = useSubmit();
   useEffect(() => {
-    console.log(token)
     if (!token) {
       return;
     }
@@ -16,7 +15,6 @@ const RootLayout = () => {
     }
 
     const tokenDuration = getTokenDuration();
-    console.log(tokenDuration);
 
     setTimeout(() => {
       submit(null, { action: "/logout", method: "POST" });

@@ -17,7 +17,7 @@ const InteriorDesignDetail = () => {
 
 const loadDesign = async (id: string) => {
   const response = await fetch(
-    `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${id}.json`
+    process.env.REACT_APP_FB_DATABASE_URL+`/design/${id}.json`
   );
   if (!response.ok) {
     throw json({ message: "Could not fetch design details." }, { status: 500 });
@@ -29,7 +29,6 @@ const loadDesign = async (id: string) => {
 
 export const loader = async ({ params }: { params: any }) => {
   const id = params.designId!;
-  console.log(id);
   return defer({ design: loadDesign(id) });
 };
 

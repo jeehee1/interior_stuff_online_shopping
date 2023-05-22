@@ -1,14 +1,9 @@
-import { useState } from "react";
 import classes from "./AuthForm.module.css";
-import {
-  firebaseAuth,
-  createUserWithEmailAndPassword,
-} from "../../config/firebase";
+
 import {
   Form,
   Link,
   useActionData,
-  useNavigate,
   useNavigation,
   useSearchParams,
 } from "react-router-dom";
@@ -36,10 +31,6 @@ const AuthForm = () => {
         <Link className={classes.mode} to={isLogin ? "/auth?mode=signup" : "/auth?mode=login"}>
           {isLogin ? "Sign Up" : "Log In"}
         </Link>
-        {/* {isSignUp && <button onClick={() => setIsSignUp(false)}>Log In</button>} */}
-        {/* {!isSignUp && (
-          <button onClick={() => setIsSignUp(true)}>Sign Up</button>
-        )} */}
         <button>{isSubmitting ? "Submitting..." : "Send"}</button>
       </div>
     </Form>

@@ -19,7 +19,7 @@ export default InteriorDesignLists;
 
 const loadDesigns = async () => {
   const response = await fetch(
-    "https://interior-design-392ca-default-rtdb.firebaseio.com/design.json"
+    process.env.REACT_APP_FB_DATABASE_URL + "/design.json"
   );
   if (!response.ok) {
     throw json({ message: "Could not fetch designs." }, { status: 500 });

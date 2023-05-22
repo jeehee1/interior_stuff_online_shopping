@@ -9,28 +9,17 @@ const RegisterItemForm = ({
 }: {
   method: any;
   imgData: { url: string; id: string };
-  item: any
-  // {
-  //   itemId: string;
-  //   itemName: string;
-  //   itemPrice: number;
-  //   itemDesc: string;
-  //   itemAddr: string;
-  //   itemCoorX: number;
-  //   itemCoorY: number;
-  // } | null;
+  item: {
+    itemId: string;
+    itemName: string;
+    itemPrice: number;
+    itemDesc: string;
+    itemAddr: string;
+    itemCoorX: number;
+    itemCoorY: number;
+  } | null;
 }) => {
   const imgRef = useRef<HTMLImageElement>(null);
-  // {
-  //   itemId: string;
-  //   itemName: string;
-  //   itemPrice: number;
-  //   itemDesc: string;
-  //   itemAddr: string;
-  //   itemCoorX: number;
-  //   itemCoorY: number;
-  // }
-  console.log(item);
 
   const [coordinates, setCoordinates] = useState<{
     coorX: number;
@@ -54,7 +43,6 @@ const RegisterItemForm = ({
       width: curImgOffset.width,
     });
   };
-  console.log(coordinates.coorX, coordinates.coorY);
 
   const itemFormRef = useRef<HTMLFormElement>(null);
 
@@ -191,12 +179,17 @@ export const action = async ({
     itemCoorX: parseInt(data.get("coor-x")),
     itemCoorY: parseInt(data.get("coor-y")),
   };
-  let url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items.json`;
+  let url =
+    process.env.REACT_APP_FB_DATABASE_URL + `/design/${designId}/items.json`;
   if (method === "PATCH") {
-    url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items/${itemId}.json`;
+    url =
+      process.env.REACT_APP_FB_DATABASE_URL +
+      `/design/${designId}/items/${itemId}.json`;
   }
   if (method === "DELETE") {
-    url = `https://interior-design-392ca-default-rtdb.firebaseio.com/design/${designId}/items/${itemId}.json`;
+    url =
+      process.env.REACT_APP_FB_DATABASE_URL +
+      `/design/${designId}/items/${itemId}.json`;
     newItem = null;
   }
 
