@@ -16,6 +16,7 @@ const EditInteriorDesign = () => {
               imgUrl: loadedDesign.imgUrl,
               imgDesc: loadedDesign.imgDesc,
               imgType: loadedDesign.imgType,
+              imgFeatures: loadedDesign.imgFeatures,
             }}
           />
         )}

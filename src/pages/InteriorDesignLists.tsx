@@ -29,7 +29,9 @@ const loadDesigns = async () => {
       return data;
     }
   } catch (e) {
-    throw json({ message: "데이터를 불러올 수 없습니다" }, { status: 500 });
+    console.log("!");
+    throw json({ message: "Could not fetch designs." }, { status: 500 });
+    return;
   }
 };
 
