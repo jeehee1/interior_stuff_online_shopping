@@ -14,13 +14,14 @@ type designsObjects = {
 const ShowDesignLists = ({ designs }: designsObjects) => {
   const navigate = useNavigate();
   const lists: any = [];
+  console.log(designs);
 
   for (const key in designs) {
     lists.push(
       <li key={key} onClick={() => navigate(`/interiors/${key}`)}>
         <img src={designs[key].imgUrl} />
         <h4>{designs[key].imgName}</h4>
-        <p>{designs[key].imgDesc}</p>
+        <div className={classes.type}>{designs[key].imgType}</div>
       </li>
     );
   }
