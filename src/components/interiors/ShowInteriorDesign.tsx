@@ -108,43 +108,45 @@ const ShowInteriorDesign = ({ design }: { design: Design }) => {
   const navigate = useNavigate();
 
   return (
-      <div key={design.id} className={classes.show}>
-        <h4 className={classes["img-name"]}>{design.imgName}</h4>
-        <p className={classes["img-desc"]}>{design.imgDesc}</p>
-        <div className={classes.content}>
-          <div className={classes["img-frame"]}>
-            <img
-              onMouseOver={showStuffInfoHandler}
-              onMouseOut={hideStuffInfoHandler}
-              src={design.imgUrl}
-              alt="cannot load the image."
-              ref={imgRef}
-            />
-            {showInfo && displayInfo}
-          </div>
+    <div key={design.id} className={classes.show}>
+      <h4 className={classes["img-name"]}>{design.imgName}</h4>
+      <p className={classes["img-desc"]}>{design.imgDesc}</p>
+      <div className={classes.content}>
+        <div className={classes["img-frame"]}>
+          <img
+            onMouseOver={showStuffInfoHandler}
+            onMouseOut={hideStuffInfoHandler}
+            src={design.imgUrl}
+            alt="cannot load the image."
+            ref={imgRef}
+          />
+          {showInfo && displayInfo}
+        </div>
+        {items.length > 0 && (
           <ShowInteriorDesignDetail
             design={design}
             items={items}
             showEditBtn={editBtn}
           />
-        </div>
-        {token === design.uid && !editBtn && (
-          <button onClick={() => setEditBtn(!editBtn)}>Edit</button>
-        )}
-        {token === design.uid && editBtn && (
-          <>
-            <button onClick={() => setEditBtn(!editBtn)}>Edit Cancel</button>
-            <button
-              onClick={() => {
-                navigate("edit");
-              }}
-            >
-              Edit Design
-            </button>
-            <button onClick={() => navigate("new")}>Add Item</button>
-          </>
         )}
       </div>
+      {token === design.uid && !editBtn && (
+        <button onClick={() => setEditBtn(!editBtn)}>Edit</button>
+      )}
+      {token === design.uid && editBtn && (
+        <>
+          <button onClick={() => setEditBtn(!editBtn)}>Edit Cancel</button>
+          <button
+            onClick={() => {
+              navigate("edit");
+            }}
+          >
+            Edit Design
+          </button>
+          <button onClick={() => navigate("new")}>Add Item</button>
+        </>
+      )}
+    </div>
   );
 };
 
