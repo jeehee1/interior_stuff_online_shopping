@@ -8,6 +8,7 @@ type designsObjects = {
     imgUrl: string;
     imgDesc: string;
     imgName: string;
+    imgFeatures: string[];
   }[];
 };
 
@@ -19,9 +20,14 @@ const ShowDesignLists = ({ designs }: designsObjects) => {
   for (const key in designs) {
     lists.push(
       <li key={key} onClick={() => navigate(`/interiors/${key}`)}>
+        <div className={classes.type}>{designs[key].imgType}</div>
         <img src={designs[key].imgUrl} />
         <h4>{designs[key].imgName}</h4>
-        <div className={classes.type}>{designs[key].imgType}</div>
+        <div className={classes.features}>
+          {designs[key].imgFeatures?.map((feature) => (
+            <span>{feature}</span>
+          ))}
+        </div>
       </li>
     );
   }
